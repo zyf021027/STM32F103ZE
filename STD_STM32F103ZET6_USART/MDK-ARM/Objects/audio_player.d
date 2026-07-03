@@ -1,0 +1,10 @@
+.\objects\audio_player.o: ..\AUDIO\audio_player.c
+.\objects\audio_player.o: ..\AUDIO\audio_player.h
+.\objects\audio_player.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\audio_player.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\audio_player.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\audio_player.o: ..\AUDIO\board_audio.h
+.\objects\audio_player.o: ..\AUDIO\sdcard_stub.h
+.\objects\audio_player.o: ..\AUDIO\pff/pff.h
+.\objects\audio_player.o: ..\AUDIO\pff/pffconf.h
+.\objects\audio_player.o: ..\AUDIO\minimp3/minimp3.h

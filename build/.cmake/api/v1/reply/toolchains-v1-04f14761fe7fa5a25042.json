@@ -1,0 +1,34 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"implicit" : {},
+				"path" : "C:/mingw64/bin/gcc.exe"
+			},
+			"language" : "C"
+		},
+		{
+			"compiler" : 
+			{
+				"implicit" : {}
+			},
+			"language" : "NONE"
+		},
+		{
+			"compiler" : 
+			{
+				"implicit" : {},
+				"path" : "C:/mingw64/bin/windres.exe"
+			},
+			"language" : "RC"
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

@@ -1,0 +1,105 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "tests/host",
+					"jsonFile" : "directory-tests.host-Debug-34b34d67251355a35c35.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "tests/host",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "stm32_rtthread_gcc_template_host"
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "stm32_audio_host_tests",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "host_audio_player_tests::@536b15002fcc2aa661af",
+					"jsonFile" : "target-host_audio_player_tests-Debug-1fc784757d4724b9fae3.json",
+					"name" : "host_audio_player_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "host_diskio_tests::@536b15002fcc2aa661af",
+					"jsonFile" : "target-host_diskio_tests-Debug-c0811aec64012ae90cdf.json",
+					"name" : "host_diskio_tests",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "host_record_tests::@536b15002fcc2aa661af",
+					"jsonFile" : "target-host_record_tests-Debug-0ac7725645edf9d20355.json",
+					"name" : "host_record_tests",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Users/Admin/Desktop/STM32F103ZET6/build",
+		"source" : "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}

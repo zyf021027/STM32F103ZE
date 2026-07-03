@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\host_record_tests.dir/objects.a
+C:\mingw64\bin\ar.exe qc CMakeFiles\host_record_tests.dir/objects.a @CMakeFiles\host_record_tests.dir\objects1.rsp
+C:\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\host_record_tests.dir/objects.a -Wl,--no-whole-archive -o host_record_tests.exe -Wl,--out-implib,libhost_record_tests.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\host_record_tests.dir\linkLibs.rsp

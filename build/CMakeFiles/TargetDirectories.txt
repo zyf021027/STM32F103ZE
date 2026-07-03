@@ -1,0 +1,9 @@
+D:/Users/Admin/Desktop/STM32F103ZET6/build/CMakeFiles/test.dir
+D:/Users/Admin/Desktop/STM32F103ZET6/build/CMakeFiles/edit_cache.dir
+D:/Users/Admin/Desktop/STM32F103ZET6/build/CMakeFiles/rebuild_cache.dir
+D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host/CMakeFiles/host_audio_player_tests.dir
+D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host/CMakeFiles/host_diskio_tests.dir
+D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host/CMakeFiles/host_record_tests.dir
+D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host/CMakeFiles/test.dir
+D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host/CMakeFiles/edit_cache.dir
+D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+-I"D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/." -I"D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/../../src" -I"D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/../../src/pff" -I"D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/../../third_party/minimp3"

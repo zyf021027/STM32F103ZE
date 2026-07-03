@@ -1,0 +1,86 @@
+[
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_audio_player_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_audio_player_tests.dir\\test_audio_player.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\test_audio_player.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/test_audio_player.c",
+  "output": "tests/host/CMakeFiles/host_audio_player_tests.dir/test_audio_player.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_audio_player_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_audio_player_tests.dir\\stubs\\test_board_audio_stub.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\stubs\\test_board_audio_stub.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/stubs/test_board_audio_stub.c",
+  "output": "tests/host/CMakeFiles/host_audio_player_tests.dir/stubs/test_board_audio_stub.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_audio_player_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_audio_player_tests.dir\\stubs\\test_sdcard_stub.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\stubs\\test_sdcard_stub.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/stubs/test_sdcard_stub.c",
+  "output": "tests/host/CMakeFiles/host_audio_player_tests.dir/stubs/test_sdcard_stub.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_audio_player_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_audio_player_tests.dir\\stubs\\test_pff_stub.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\stubs\\test_pff_stub.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/stubs/test_pff_stub.c",
+  "output": "tests/host/CMakeFiles/host_audio_player_tests.dir/stubs/test_pff_stub.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_audio_player_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_audio_player_tests.dir\\stubs\\test_minimp3_stub.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\stubs\\test_minimp3_stub.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/stubs/test_minimp3_stub.c",
+  "output": "tests/host/CMakeFiles/host_audio_player_tests.dir/stubs/test_minimp3_stub.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_audio_player_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_audio_player_tests.dir\\__\\__\\src\\audio_player.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\src\\audio_player.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/src/audio_player.c",
+  "output": "tests/host/CMakeFiles/host_audio_player_tests.dir/__/__/src/audio_player.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_diskio_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_diskio_tests.dir\\test_diskio.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\test_diskio.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/test_diskio.c",
+  "output": "tests/host/CMakeFiles/host_diskio_tests.dir/test_diskio.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_diskio_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_diskio_tests.dir\\stubs\\test_board_audio_stub.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\stubs\\test_board_audio_stub.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/stubs/test_board_audio_stub.c",
+  "output": "tests/host/CMakeFiles/host_diskio_tests.dir/stubs/test_board_audio_stub.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_diskio_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_diskio_tests.dir\\stubs\\test_sdcard_stub.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\stubs\\test_sdcard_stub.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/stubs/test_sdcard_stub.c",
+  "output": "tests/host/CMakeFiles/host_diskio_tests.dir/stubs/test_sdcard_stub.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_diskio_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_diskio_tests.dir\\stubs\\test_pff_stub.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\stubs\\test_pff_stub.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/stubs/test_pff_stub.c",
+  "output": "tests/host/CMakeFiles/host_diskio_tests.dir/stubs/test_pff_stub.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_diskio_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_diskio_tests.dir\\stubs\\test_minimp3_stub.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\stubs\\test_minimp3_stub.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/stubs/test_minimp3_stub.c",
+  "output": "tests/host/CMakeFiles/host_diskio_tests.dir/stubs/test_minimp3_stub.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_diskio_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_diskio_tests.dir\\__\\__\\src\\pff\\diskio.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\src\\pff\\diskio.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/src/pff/diskio.c",
+  "output": "tests/host/CMakeFiles/host_diskio_tests.dir/__/__/src/pff/diskio.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_record_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_record_tests.dir\\test_board_audio_logic.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\tests\\host\\test_board_audio_logic.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/tests/host/test_board_audio_logic.c",
+  "output": "tests/host/CMakeFiles/host_record_tests.dir/test_board_audio_logic.c.obj"
+},
+{
+  "directory": "D:/Users/Admin/Desktop/STM32F103ZET6/build/tests/host",
+  "command": "C:\\mingw64\\bin\\gcc.exe  @CMakeFiles/host_record_tests.dir/includes_C.rsp -g -std=gnu11 -o CMakeFiles\\host_record_tests.dir\\__\\__\\src\\audio_record.c.obj -c D:\\Users\\Admin\\Desktop\\STM32F103ZET6\\stm32_rtthread_gcc-template\\src\\audio_record.c",
+  "file": "D:/Users/Admin/Desktop/STM32F103ZET6/stm32_rtthread_gcc-template/src/audio_record.c",
+  "output": "tests/host/CMakeFiles/host_record_tests.dir/__/__/src/audio_record.c.obj"
+}
+]

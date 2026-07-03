@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI 时代单元测试的必要性与优势</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --paper: #fffdf8;
+      --paper-2: #f1eee6;
+      --ink: #20242a;
+      --muted: #66717d;
+      --line: #ded8cb;
+      --accent: #0f766e;
+      --accent-2: #b45309;
+      --accent-soft: #e4f3ef;
+      --warn-soft: #fff4df;
+      --code-bg: #111827;
+      --code-ink: #e5e7eb;
+      --shadow: 0 22px 60px rgba(31, 35, 40, .10);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, .16), transparent 34rem),
+        radial-gradient(circle at 90% 12%, rgba(180, 83, 9, .10), transparent 30rem),
+        linear-gradient(180deg, #fbfaf6 0%, var(--bg) 44%, #ebe6dc 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.72;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 72px 0 34px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(222, 216, 203, .92);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(255,253,248,.96), rgba(241,238,230,.88));
+      box-shadow: var(--shadow);
+      padding: clamp(28px, 5vw, 60px);
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -120px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15,118,110,.22), transparent 66%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      border: 1px solid rgba(15,118,110,.24);
+      border-radius: 999px;
+      color: #0b625c;
+      background: rgba(228,243,239,.88);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 24px 0 18px;
+      max-width: 880px;
+      font-size: clamp(34px, 5vw, 66px);
+      line-height: 1.08;
+      letter-spacing: -.05em;
+    }
+
+    .subtitle {
+      max-width: 850px;
+      margin: 0;
+      color: #3f4852;
+      font-size: clamp(17px, 2.2vw, 22px);
+    }
+
+    .thesis {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,.58);
+      padding: 18px;
+    }
+
+    .metric b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+      padding: 22px 0 72px;
+    }
+
+    .toc {
+      position: sticky;
+      top: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255,253,248,.78);
+      box-shadow: 0 14px 40px rgba(31, 35, 40, .06);
+      backdrop-filter: blur(18px);
+      padding: 18px;
+    }
+
+    .toc-title {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .toc a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: #47515d;
+      font-size: 14px;
+    }
+
+    .toc a:hover { background: var(--accent-soft); color: #0b625c; }
+
+    main {
+      min-width: 0;
+    }
+
+    section {
+      margin-bottom: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255,253,248,.92);
+      box-shadow: 0 16px 48px rgba(31, 35, 40, .055);
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: clamp(24px, 3.2vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+
+    h3 {
+      margin: 28px 0 10px;
+      color: #24303a;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    p { margin: 12px 0; }
+
+    .summary {
+      border: 1px solid rgba(15,118,110,.25);
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #e4f3ef, #f9fcfa);
+      padding: 22px;
+      font-size: 17px;
+    }
+
+    .summary strong { color: #0b625c; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, #fffefa, #f7f4ed);
+      padding: 18px;
+    }
+
+    .card h4 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 17px;
+    }
+
+    .card p { margin: 0; color: #4f5b66; font-size: 15px; }
+
+    .cost-shift {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 18px;
+    }
+
+    .era {
+      border-radius: var(--radius-md);
+      padding: 20px;
+      border: 1px solid var(--line);
+      background: #fffdf8;
+    }
+
+    .era.old { background: #f7efe6; }
+    .era.new { background: #e8f5f2; border-color: rgba(15,118,110,.22); }
+
+    .era h4 { margin: 0 0 10px; font-size: 18px; }
+    .era ul { margin: 0; padding-left: 20px; }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font-size: 15px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #26313b;
+      background: var(--paper-2);
+      font-weight: 800;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    code, pre {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 7px;
+      background: #eee8dc;
+      color: #7c2d12;
+      font-size: .92em;
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: 16px 0 0;
+      border-radius: var(--radius-md);
+      background: var(--code-bg);
+      color: var(--code-ink);
+      padding: 20px;
+      line-height: 1.55;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    pre code {
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 14px;
+    }
+
+    .priority {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #0b625c;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .priority.mid { background: #fff4df; color: #92400e; }
+    .priority.low { background: #eceff3; color: #52606d; }
+
+    .callout {
+      margin: 20px 0 0;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(180,83,9,.22);
+      background: var(--warn-soft);
+      padding: 18px;
+    }
+
+    .strategy-list {
+      counter-reset: item;
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .strategy-list li {
+      counter-increment: item;
+      position: relative;
+      padding: 16px 16px 16px 54px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fffefa;
+    }
+
+    .strategy-list li::before {
+      content: counter(item);
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .conclusion {
+      border-color: rgba(15,118,110,.30);
+      background:
+        linear-gradient(135deg, rgba(228,243,239,.96), rgba(255,253,248,.94));
+    }
+
+    .final-line {
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background: #0f2f2d;
+      color: #eaf7f4;
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .meta {
+      margin-top: 34px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .thesis, .cards, .cost-shift { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); }
+      .layout { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      .hero { padding-top: 36px; }
+    }
+
+    @media print {
+      body { background: white; }
+      .toc { display: none; }
+      .layout { display: block; }
+      section, .hero-card { box-shadow: none; break-inside: avoid; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero shell">
+    <div class="hero-card">
+      <div class="eyebrow">Engineering White Paper · Host-side Tests</div>
+      <h1>AI 时代单元测试的必要性与优势</h1>
+      <p class="subtitle">AI 负责加速生成，单元测试负责约束生成。真正的工程速度，不是代码写得更快，而是错误更早暴露、回归更快被发现、上板调试更少被纯软件问题拖住。</p>
+      <div class="thesis">
+        <div class="metric"><b>更快反馈</b><span>AI 改完代码后立即用测试验证关键行为。</span></div>
+        <div class="metric"><b>更稳演进</b><span>重构、拆模块、补边界时防止行为漂移。</span></div>
+        <div class="metric"><b>无硬件先行</b><span>板子回来前先清掉算法、状态机、协议类 bug。</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout shell">
+    <nav class="toc" aria-label="目录">
+      <p class="toc-title">目录</p>
+      <a href="#summary">核心结论</a>
+      <a href="#what">1. 单元测试测什么</a>
+      <a href="#why-ai">2. AI 时代为什么更需要</a>
+      <a href="#cost">2.1 成本收益反转</a>
+      <a href="#advantages">3. AI 协作优势</a>
+      <a href="#embedded">4. 嵌入式优先对象</a>
+      <a href="#example">5. 按键消抖例子</a>
+      <a href="#limits">6. 不能替代什么</a>
+      <a href="#strategy">7. 落地策略</a>
+      <a href="#value">8. 价值判断</a>
+      <a href="#conclusion">9. 结论</a>
+    </nav>
+
+    <main>
+      <section id="summary">
+        <h2>核心结论</h2>
+        <div class="summary">
+          <strong>AI 会显著提高写代码、改代码和生成样例的速度，但它不会自动保证行为正确。</strong> 单元测试的价值不是“证明代码看起来没问题”，而是把关键行为变成可重复执行的工程事实：给定输入、执行被测单元、观察输出或副作用、与预期比较。在 AI 参与开发越多的时代，单元测试越像工程的地基和护栏。
+        </div>
+      </section>
+
+      <section id="what">
+        <h2>1. 单元测试到底在测什么</h2>
+        <p>单元测试不是简单地“跑一下程序看有没有崩”，而是在一个尽量小、尽量可隔离的边界上验证行为。这个边界可以是一个函数、一个模块、一个状态机、一个协议解析器、一个算法对象，也可以是一段 host-side 可运行的固件核心逻辑。</p>
+        <pre><code>准备已知输入
+→ 调用被测单元
+→ 捕获输出、状态变化、事件、错误码或副作用
+→ 与预期结果比较</code></pre>
+        <p>在嵌入式固件里，适合单元测试的对象通常不是 GPIO、ADC、LCD 这些真实硬件本身，而是硬件背后的纯逻辑：消抖状态机、协议帧解析、测量算法、校准计算、配置合法性检查、存储记录编码、DSP 数值处理、UI model 状态转换等。</p>
+      </section>
+
+      <section id="why-ai">
+        <h2>2. AI 时代为什么更需要单元测试</h2>
+        <p>AI 写代码的速度快，但快带来的不是天然正确，而是“错误传播速度也更快”。如果没有测试，工程会很快进入“看起来很完整，但没有事实约束”的状态。</p>
+        <table>
+          <thead><tr><th>必要性</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>固定真实需求</td><td>AI 容易按语言相似性补代码，测试把“我们真正要的行为”固定下来。</td></tr>
+            <tr><td>防止无意回归</td><td>AI 修改一个模块时可能顺手影响另一个路径，测试能快速发现原有行为被破坏。</td></tr>
+            <tr><td>降低人工审查负担</td><td>人不必逐行相信 AI，而是看关键行为是否被测试覆盖、测试是否通过。</td></tr>
+            <tr><td>逼出可测试架构</td><td>如果模块测不了，通常说明它和硬件、RTOS、全局变量、时间、IO 耦合过深。</td></tr>
+          </tbody>
+        </table>
+        <div class="callout">本质上，AI 越会生成代码，人越需要把判断标准前置。测试就是把“验收标准”写成机器能执行的规则。</div>
+      </section>
+
+      <section id="cost">
+        <h2>2.1 单元测试的成本收益已经反转</h2>
+        <p>过去很多项目不愿意写单元测试，一个现实原因是成本太高：业务逻辑还在变，测试框架要搭，mock 要写，工程师还要同时赶进度。对短周期嵌入式项目来说，单元测试很容易被看成“额外工作”，甚至被认为会拖慢项目。</p>
+        <div class="cost-shift">
+          <div class="era old">
+            <h4>以前：测试像额外成本</h4>
+            <ul>
+              <li>测试框架搭建慢</li>
+              <li>mock 与样例维护费时</li>
+              <li>需求变化导致测试反复改</li>
+              <li>短周期项目倾向先上板再说</li>
+            </ul>
+          </div>
+          <div class="arrow">→</div>
+          <div class="era new">
+            <h4>现在：测试变成加速器</h4>
+            <ul>
+              <li>AI 快速生成测试骨架与边界用例</li>
+              <li>接口变化后可同步调整测试</li>
+              <li>AI 改代码后立即得到行为反馈</li>
+              <li>减少人工阅读和上板试错</li>
+            </ul>
+          </div>
+        </div>
+        <p>对嵌入式项目尤其关键的是<strong>无硬件初期</strong>。板子没回来、外设没焊好、仪器没接上时，很多算法、状态机、协议解析、参数裁剪和 UI model 仍然可以在 PC 上跑。提前写单元测试，可以先把纯软件 bug 清掉一批，让后续上板调试更聚焦在真实硬件问题上。</p>
+        <div class="summary"><strong>因此在 AI 协作下，单元测试的价值不是“多一道流程”，而是：加快反馈速度、提高稳定性、减少回归 bug，并在没有硬件时提前消化软件风险。</strong></div>
+      </section>
+
+      <section id="advantages">
+        <h2>3. 单元测试给 AI 协作带来的优势</h2>
+        <div class="cards">
+          <div class="card"><h4>让 AI 有明确目标</h4><p>从“把按键处理好”变成“抖动期间无事件，释放稳定后只产生一次短按事件”。</p></div>
+          <div class="card"><h4>让重构可控</h4><p>结构是否更清晰由人判断，行为是否没变由单元测试和回归测试判断。</p></div>
+          <div class="card"><h4>把经验变成资产</h4><p>“CRC 错误必须拒绝加载”等规则写进测试后，会在每次构建中执行。</p></div>
+          <div class="card"><h4>帮助定位问题</h4><p>测试失败能把问题从“整个系统不对”缩小到“这个单元在这个条件下不对”。</p></div>
+        </div>
+      </section>
+
+      <section id="embedded">
+        <h2>4. 嵌入式里哪些东西应该优先单元测试</h2>
+        <p>嵌入式工程不是所有东西都适合单元测试。优先级应该放在“纯逻辑、高风险、高复用、容易回归”的部分。</p>
+        <table>
+          <thead><tr><th>优先级</th><th>对象</th><th>原因</th></tr></thead>
+          <tbody>
+            <tr><td><span class="priority">高</span></td><td>算法、DSP、校准、插值、统计、滤波</td><td>输入输出明确，错误影响核心指标。</td></tr>
+            <tr><td><span class="priority">高</span></td><td>状态机、按键、菜单、测量流程、故障状态</td><td>状态组合多，人工上板很难覆盖完整。</td></tr>
+            <tr><td><span class="priority">高</span></td><td>协议解析、数据帧、CRC、存储记录</td><td>边界条件明确，容易被 AI 改坏。</td></tr>
+            <tr><td><span class="priority mid">中</span></td><td>配置检查、参数裁剪、错误码映射</td><td>可快速验证业务规则。</td></tr>
+            <tr><td><span class="priority mid">中</span></td><td>UI model、view model、事件路由</td><td>不需要真实屏幕也能验证状态变化。</td></tr>
+            <tr><td><span class="priority low">低</span></td><td>HAL 初始化、真实外设寄存器配置</td><td>更适合集成测试、硬件在环测试或厂商工具验证。</td></tr>
+          </tbody>
+        </table>
+        <div class="callout">一句话：<strong>单元测试优先测不需要真实硬件就能判定对错的部分。</strong></div>
+      </section>
+
+      <section id="example">
+        <h2>5. 一个最小代码例子：按键消抖</h2>
+        <p>下面例子说明单元测试如何把“短按事件只产生一次”变成可执行事实。被测代码可以是纯 C，不依赖 GPIO、不依赖 RTOS。</p>
+        <pre><code>key_filter_t filter;
+key_filter_init(&amp;filter);
+
+assert(key_filter_update(&amp;filter, KEY_LEVEL_PRESSED) == KEY_EVENT_NONE);
+assert(key_filter_update(&amp;filter, KEY_LEVEL_RELEASED) == KEY_EVENT_NONE);
+assert(key_filter_update(&amp;filter, KEY_LEVEL_PRESSED) == KEY_EVENT_NONE);
+
+assert(key_filter_update(&amp;filter, KEY_LEVEL_PRESSED) == KEY_EVENT_NONE);
+assert(key_filter_update(&amp;filter, KEY_LEVEL_PRESSED) == KEY_EVENT_NONE);
+
+assert(key_filter_update(&amp;filter, KEY_LEVEL_RELEASED) == KEY_EVENT_NONE);
+assert(key_filter_update(&amp;filter, KEY_LEVEL_RELEASED) == KEY_EVENT_NONE);
+assert(key_filter_update(&amp;filter, KEY_LEVEL_RELEASED) == KEY_EVENT_SHORT_PRESS);</code></pre>
+        <p>这个测试表达的是：前面的抖动不应产生事件，连续稳定释放后才产生一次短按事件。以后无论是人改代码还是 AI 改代码，只要破坏这个行为，测试就会失败。</p>
+      </section>
+
+      <section id="limits">
+        <h2>6. 单元测试不能替代什么</h2>
+        <p>单元测试不是万能的。它不能证明真实硬件一定正常，也不能证明系统整体指标达标。</p>
+        <table>
+          <thead><tr><th>测试类型</th><th>适合验证</th></tr></thead>
+          <tbody>
+            <tr><td>单元测试</td><td>纯逻辑、算法、状态机、协议、数据结构。</td></tr>
+            <tr><td>集成测试</td><td>模块之间能否按接口协同工作。</td></tr>
+            <tr><td>硬件在环测试</td><td>真实 ADC、SPI、I2C、LCD、Flash、RF 链路等硬件行为。</td></tr>
+            <tr><td>系统测试</td><td>完整产品流程、性能指标、用户场景和可靠性。</td></tr>
+          </tbody>
+        </table>
+        <div class="callout">单元测试的定位不是替代上板调试，而是把不需要上板的问题提前在电脑上抓掉。</div>
+      </section>
+
+      <section id="strategy">
+        <h2>7. AI 协作下的落地策略</h2>
+        <p>AI 时代做单元测试，不必一开始追求覆盖率数字，而应先覆盖工程里最容易被改坏、最影响产品正确性的行为。</p>
+        <ol class="strategy-list">
+          <li><strong>先测纯逻辑层：</strong>优先给算法、状态机、协议、配置和存储格式补测试。</li>
+          <li><strong>先写关键行为，不追求全覆盖：</strong>覆盖 10 个关键边界条件，比生成 100 个无意义测试更有价值。</li>
+          <li><strong>把硬件隔离成 port/ops：</strong>核心逻辑通过 mock/stub 输入硬件结果，真实硬件留给集成测试。</li>
+          <li><strong>让 AI 先写失败用例再改实现：</strong>这样 AI 的目标是让明确行为通过，而不是自由补代码。</li>
+          <li><strong>把 bug 变成回归测试：</strong>每次修复一个真实 bug，都补一个最小复现测试，防止下次改回来。</li>
+          <li><strong>CI 中长期运行：</strong>测试只有被持续执行，才是护栏；放在仓库里不运行只是文档。</li>
+        </ol>
+      </section>
+
+      <section id="value">
+        <h2>8. 判断一组单元测试是否有价值</h2>
+        <div class="cards">
+          <div class="card"><h4>行为明确</h4><p>能说明一个具体行为，而不是只为了提高覆盖率。</p></div>
+          <div class="card"><h4>边界清楚</h4><p>输入、预期和边界条件清楚，失败时能定位到明确模块或规则。</p></div>
+          <div class="card"><h4>可脱离硬件</h4><p>不依赖真实硬件、时间随机性或外部网络。</p></div>
+          <div class="card"><h4>长期稳定</h4><p>不因内部实现稍微调整就大量误报，能成为演进基线。</p></div>
+        </div>
+      </section>
+
+      <section id="conclusion" class="conclusion">
+        <h2>9. 结论</h2>
+        <p>AI 让代码生成变快，但工程正确性仍然来自可验证事实。单元测试的作用，就是把人真正关心的行为、边界和风险写成机器能反复执行的规则。对嵌入式工程来说，它尤其适合守住纯逻辑层、算法层、状态机和协议层，让上板调试专注于真正需要硬件证明的部分。</p>
+        <div class="final-line">AI 负责加速生成，单元测试负责约束生成；没有测试的 AI 编程，本质上是在加速制造不确定性。</div>
+      </section>
+
+      <p class="meta">来源：Obsidian 知识库笔记《AI 时代单元测试的必要性与优势》 · 自包含 HTML artifact · 2026-06-21</p>
+    </main>
+  </div>
+</body>
+</html>

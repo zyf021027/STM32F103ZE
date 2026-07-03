@@ -1,0 +1,123 @@
+version: "4.1"
+name: stm32_rtthread_gcc
+type: ARM
+deviceName: STM32F103ZE
+packDir: null
+srcDirs:
+  - src
+  - lib
+virtualFolder:
+  name: <virtual_root>
+  files: []
+  folders: []
+dependenceList: []
+outDir: build
+miscInfo:
+  lastBuildTime: 1608695075742
+  uid: 72d63667fe10999cc93168f8f2acbc7a
+targets:
+  Debug:
+    cppPreprocessAttrs:
+      defineList:
+        - USE_STDPERIPH_DRIVER
+        - STM32F10X_HD
+      incList:
+        - src
+        - lib/cmsis
+        - lib/STM32F10x_StdPeriph_Driver
+        - lib/STM32F10x_StdPeriph_Driver/inc
+        - lib/STM32F10x_StdPeriph_Driver/src
+        - lib/rt-thread/config
+        - lib/rt-thread/include
+        - lib/rt-thread/src
+        - lib/rt-thread/libcpu
+        - lib/rt-thread/finsh
+      libList: []
+    excludeList:
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c
+      - lib/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c
+    settings:
+      debugger: cortex-debug
+    toolchain: GCC
+    toolchainConfigMap:
+      GCC:
+        archExtensions: ""
+        cpuType: Cortex-M3
+        floatingPointHardware: default
+        options:
+          version: 5
+          afterBuildTasks: []
+          asm-compiler:
+            ASM_FLAGS: ""
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            CXX_FLAGS: ""
+            C_FLAGS: ""
+            language-c: c11
+            language-cpp: c++11
+            one-elf-section-per-data: true
+            one-elf-section-per-function: true
+            optimization: level-debug
+            warnings: all-warnings
+          global:
+            $float-abi-type: softfp
+            misc-control: --specs=nosys.specs --specs=nano.specs
+            output-debug-info: enable
+          linker:
+            LD_FLAGS: ""
+            LIB_FLAGS: -lm
+            output-format: elf
+            remove-unused-input-sections: true
+        scatterFilePath: .\stm32f103ze_flash.ld
+        storageLayout:
+          RAM:
+            - id: 1
+              isChecked: "1"
+              mem:
+                size: "0x10000"
+                startAddr: "0x20000000"
+              noInit: false
+              tag: IRAM
+          ROM:
+            - id: 1
+              isChecked: "1"
+              isStartup: true
+              mem:
+                size: "0x80000"
+                startAddr: "0x08000000"
+              tag: IROM
+        useCustomScatterFile: true
+    uploadConfigMap:
+      JLink:
+        baseAddr: "0x08000000"
+        bin: ""
+        cpuInfo:
+          cpuName: STM32F103ZE
+          vendor: ST
+        otherCmds: ""
+        proType: 1
+        speed: 8000
+      STLink:
+        address: "0x08000000"
+        bin: ""
+        elFile: None
+        optionBytes: .eide/debug.st.option.bytes.ini
+        otherCmds: ""
+        proType: SWD
+        resetMode: default
+        runAfterProgram: true
+        speed: 4000
+    uploader: JLink
