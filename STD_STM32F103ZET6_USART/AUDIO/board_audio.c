@@ -27,7 +27,7 @@
 #define ES8311_I2C_READ_OFFSET 0x01
 #define AUDIO_SAMPLE_RATE 48000U
 #define AUDIO_TEST_TABLE_SIZE 48U
-#define AUDIO_PLAYBACK_GAIN 4
+#define AUDIO_PLAYBACK_VOLUME_PERCENT 10U
 #define AUDIO_MODE_NONE 0
 #define AUDIO_MODE_PLAYBACK 1
 #define AUDIO_MODE_RECORD 2
@@ -40,9 +40,9 @@ static const int16_t audio_test_wave[AUDIO_TEST_TABLE_SIZE] = {
     -10392, -11012, -11590, -11876, -12000, -11876, -11590, -11012,
     -10392, -9510, -8485, -7308, -6000, -4592, -3105, -1566};
 
-static int16_t board_audio_apply_gain(int16_t sample)
+static int16_t board_audio_apply_volume(int16_t sample)
 {
-    int32_t value = (int32_t)sample * AUDIO_PLAYBACK_GAIN;
+    int32_t value = ((int32_t)sample * (int32_t)AUDIO_PLAYBACK_VOLUME_PERCENT) / 100;
 
     if (value > 32767)
         return 32767;
@@ -201,23 +201,76 @@ static void board_audio_capture_debug_regs(void)
 {
     uint8_t value;
 
-    if (es8311_read_reg(0x32, &value) == 0)
-        g_audio_debug.codec_reg32 = value;
+    if (es8311_read_reg(0x00, &value) == 0)
+        g_audio_debug.codec_reg00 = value;
+    if (es8311_read_reg(0x01, &value) == 0)
+        g_audio_debug.codec_reg01 = value;
+    if (es8311_read_reg(0x02, &value) == 0)
+        g_audio_debug.codec_reg02 = value;
+    if (es8311_read_reg(0x03, &value) == 0)
+        g_audio_debug.codec_reg03 = value;
+    if (es8311_read_reg(0x04, &value) == 0)
+        g_audio_debug.codec_reg04 = value;
+    if (es8311_read_reg(0x05, &value) == 0)
+        g_audio_debug.codec_reg05 = value;
+    if (es8311_read_reg(0x06, &value) == 0)
+        g_audio_debug.codec_reg06 = value;
+    if (es8311_read_reg(0x07, &value) == 0)
+        g_audio_debug.codec_reg07 = value;
+    if (es8311_read_reg(0x08, &value) == 0)
+        g_audio_debug.codec_reg08 = value;
+    if (es8311_read_reg(0x09, &value) == 0)
+        g_audio_debug.codec_reg09 = value;
+    if (es8311_read_reg(0x0A, &value) == 0)
+        g_audio_debug.codec_reg0a = value;
+    if (es8311_read_reg(0x0B, &value) == 0)
+        g_audio_debug.codec_reg0b = value;
+    if (es8311_read_reg(0x0C, &value) == 0)
+        g_audio_debug.codec_reg0c = value;
+    if (es8311_read_reg(0x0D, &value) == 0)
+        g_audio_debug.codec_reg0d = value;
+    if (es8311_read_reg(0x0E, &value) == 0)
+        g_audio_debug.codec_reg0e = value;
+    if (es8311_read_reg(0x0F, &value) == 0)
+        g_audio_debug.codec_reg0f = value;
+    if (es8311_read_reg(0x10, &value) == 0)
+        g_audio_debug.codec_reg10 = value;
+    if (es8311_read_reg(0x11, &value) == 0)
+        g_audio_debug.codec_reg11 = value;
+    if (es8311_read_reg(0x12, &value) == 0)
+        g_audio_debug.codec_reg12 = value;
+    if (es8311_read_reg(0x13, &value) == 0)
+        g_audio_debug.codec_reg13 = value;
+    if (es8311_read_reg(0x14, &value) == 0)
+        g_audio_debug.codec_reg14 = value;
+    if (es8311_read_reg(0x16, &value) == 0)
+        g_audio_debug.codec_reg16 = value;
+    if (es8311_read_reg(0x25, &value) == 0)
+        g_audio_debug.codec_reg25 = value;
     if (es8311_read_reg(0x31, &value) == 0)
         g_audio_debug.codec_reg31 = value;
+    if (es8311_read_reg(0x32, &value) == 0)
+        g_audio_debug.codec_reg32 = value;
     if (es8311_read_reg(0x33, &value) == 0)
         g_audio_debug.codec_reg33 = value;
     if (es8311_read_reg(0x34, &value) == 0)
         g_audio_debug.codec_reg34 = value;
-    if (es8311_read_reg(0x0D, &value) == 0)
-        g_audio_debug.codec_reg0d = value;
-    if (es8311_read_reg(0x25, &value) == 0)
-        g_audio_debug.codec_reg25 = value;
+    if (es8311_read_reg(0x37, &value) == 0)
+        g_audio_debug.codec_reg37 = value;
     if (es8311_read_reg(0x44, &value) == 0)
         g_audio_debug.codec_reg44 = value;
 
     g_audio_debug.spi3_sr = SPI3->SR;
     g_audio_debug.spi3_i2scfgr = SPI3->I2SCFGR;
+    g_audio_debug.spi3_i2spr = SPI3->I2SPR;
+    g_audio_debug.spi3_cr2 = SPI3->CR2;
+    g_audio_debug.gpioa_idr = GPIOA->IDR;
+    g_audio_debug.gpiob_idr = GPIOB->IDR;
+    g_audio_debug.gpioc_idr = GPIOC->IDR;
+    g_audio_debug.gpioa_odr = GPIOA->ODR;
+    g_audio_debug.gpiob_odr = GPIOB->ODR;
+    g_audio_debug.gpioc_odr = GPIOC->ODR;
+    g_audio_debug.rcc_cfgr = RCC->CFGR;
     g_audio_debug.gpio_amp_state = GPIO_ReadOutputDataBit(AUDIO_AMP_PORT, AUDIO_AMP_PIN);
 }
 
@@ -338,9 +391,9 @@ static int board_audio_codec_init_playback(void)
     if (es8311_probe() != 0)
         return -1;
 
-    result |= es8311_write_reg(0x00, 0x80);
-    audio_delay_ms(10);
     result |= es8311_write_reg(0x00, 0x3F);
+    audio_delay_ms(10);
+    result |= es8311_write_reg(0x00, 0x80);
     audio_delay_ms(2);
     result |= es8311_write_reg(0x01, 0x30);
     result |= es8311_write_reg(0x02, 0x00);
@@ -363,8 +416,10 @@ static int board_audio_codec_init_playback(void)
     result |= es8311_write_reg(0x33, 0x00);
     result |= es8311_write_reg(0x34, 0x00);
     result |= es8311_write_reg(0x0E, 0x02);
+    result |= es8311_write_reg(0x12, 0x01);
+    result |= es8311_write_reg(0x13, 0x10);
     result |= es8311_write_reg(0x14, 0x1A);
-    result |= es8311_write_reg(0x0D, 0x01);
+    result |= es8311_write_reg(0x0D, 0x06);
     result |= es8311_write_reg(0x25, 0x00);
     result |= es8311_write_reg(0x01, 0x3F);
     board_audio_capture_debug_regs();
@@ -511,14 +566,14 @@ int board_audio_play_pcm(const int16_t *pcm, uint32_t samples, uint32_t channels
     if (channels == 1U)
     {
         for (i = 0; i < samples; ++i)
-            board_audio_write_frame(board_audio_apply_gain(pcm[i]), board_audio_apply_gain(pcm[i]));
+            board_audio_write_frame(board_audio_apply_volume(pcm[i]), board_audio_apply_volume(pcm[i]));
         return 0;
     }
 
     if (channels == 2U)
     {
         for (i = 0; i < samples; ++i)
-            board_audio_write_frame(board_audio_apply_gain(pcm[i * 2U]), board_audio_apply_gain(pcm[i * 2U + 1U]));
+            board_audio_write_frame(board_audio_apply_volume(pcm[i * 2U]), board_audio_apply_volume(pcm[i * 2U + 1U]));
         return 0;
     }
 
@@ -569,7 +624,7 @@ int board_audio_play_test_tone(uint32_t duration_ms)
     uint32_t index;
 
     for (index = 0; index < total_samples; ++index)
-        board_audio_write_frame(board_audio_apply_gain(audio_test_wave[index % AUDIO_TEST_TABLE_SIZE]), board_audio_apply_gain(audio_test_wave[index % AUDIO_TEST_TABLE_SIZE]));
+        board_audio_write_frame(board_audio_apply_volume(audio_test_wave[index % AUDIO_TEST_TABLE_SIZE]), board_audio_apply_volume(audio_test_wave[index % AUDIO_TEST_TABLE_SIZE]));
     return 0;
 }
 

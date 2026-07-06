@@ -36,7 +36,7 @@ I (..\FWLib\inc\misc.h)(0x4D783BB4)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (..\HARDWARE\GPIO\gpio.h)(0x693F6B9C)
 I (..\SYSTEM\delay\delay.h)(0x693F877E)
-F (..\USER\main.c)(0x6A476841)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CORE -I ..\CORE\arm -I ..\FWLib\inc -I ..\USER -I ..\HARDWARE\GPIO -I ..\SYSTEM\delay -I ..\HARDWARE\EXTI -I ..\HARDWARE\USART -I ..\AUDIO -I ..\AUDIO\pff -I ..\AUDIO\minimp3-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\USER\main.c)(0x6A4B24A2)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CORE -I ..\CORE\arm -I ..\FWLib\inc -I ..\USER -I ..\HARDWARE\GPIO -I ..\SYSTEM\delay -I ..\HARDWARE\EXTI -I ..\HARDWARE\USART -I ..\AUDIO -I ..\AUDIO\pff -I ..\AUDIO\minimp3-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
@@ -71,7 +71,7 @@ I (..\HARDWARE\USART\usart.h)(0x69420AE2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (..\AUDIO\audio_player.h)(0x6A463F7F)
 I (..\AUDIO\audio_record.h)(0x6A462B78)
-I (..\AUDIO\board_audio.h)(0x6A463F80)
+I (..\AUDIO\board_audio.h)(0x6A4B240E)
 I (..\AUDIO\sdcard_stub.h)(0x6A463F80)
 F (..\USER\stm32f10x_it.c)(0x4D99A59E)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CORE -I ..\CORE\arm -I ..\FWLib\inc -I ..\USER -I ..\HARDWARE\GPIO -I ..\SYSTEM\delay -I ..\HARDWARE\EXTI -I ..\HARDWARE\USART -I ..\AUDIO -I ..\AUDIO\pff -I ..\AUDIO\minimp3-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)
 I (..\USER\stm32f10x_it.h)(0x4D99A59E)
@@ -231,7 +231,7 @@ I (..\AUDIO\audio_player.h)(0x6A463F7F)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (..\AUDIO\board_audio.h)(0x6A463F80)
+I (..\AUDIO\board_audio.h)(0x6A4B240E)
 I (..\AUDIO\sdcard_stub.h)(0x6A463F80)
 I (..\AUDIO\pff/pff.h)(0x5C5193B8)
 I (..\AUDIO\pff/pffconf.h)(0x6A46183F)
@@ -240,9 +240,9 @@ F (..\AUDIO\audio_record.c)(0x6A462B78)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=i
 I (..\AUDIO\audio_record.h)(0x6A462B78)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (..\AUDIO\board_audio.h)(0x6A463F80)
-F (..\AUDIO\board_audio.c)(0x6A4766EB)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CORE -I ..\CORE\arm -I ..\FWLib\inc -I ..\USER -I ..\HARDWARE\GPIO -I ..\SYSTEM\delay -I ..\HARDWARE\EXTI -I ..\HARDWARE\USART -I ..\AUDIO -I ..\AUDIO\pff -I ..\AUDIO\minimp3-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\board_audio.o --omf_browse .\objects\board_audio.crf --depend .\objects\board_audio.d)
-I (..\AUDIO\board_audio.h)(0x6A463F80)
+I (..\AUDIO\board_audio.h)(0x6A4B240E)
+F (..\AUDIO\board_audio.c)(0x6A4B2588)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\CORE -I ..\CORE\arm -I ..\FWLib\inc -I ..\USER -I ..\HARDWARE\GPIO -I ..\SYSTEM\delay -I ..\HARDWARE\EXTI -I ..\HARDWARE\USART -I ..\AUDIO -I ..\AUDIO\pff -I ..\AUDIO\minimp3-IC:\Users\Admin\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="536" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o .\objects\board_audio.o --omf_browse .\objects\board_audio.crf --depend .\objects\board_audio.d)
+I (..\AUDIO\board_audio.h)(0x6A4B240E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
