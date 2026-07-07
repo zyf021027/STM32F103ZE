@@ -22,7 +22,6 @@
 #define SD_INIT_RETRY_COUNT 5000U
 #define SD_CMD_TIMEOUT 0x00FFFFFFUL
 #define SD_DATA_TIMEOUT 0x0FFFFFFFUL
-#define SD_READ_LOOP_TIMEOUT 0x00FFFFFFUL
 #define SDIO_STATIC_CMD_FLAGS (SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CTIMEOUT | SDIO_FLAG_CMDREND | SDIO_FLAG_CMDSENT)
 
 static uint32_t g_sd_rca;
@@ -38,8 +37,6 @@ static uint32_t g_sd_last_cmdresp;
 static uint32_t g_sd_read_count;
 static uint32_t g_sd_read_error_count;
 static uint32_t g_sd_last_read_sig;
-
-static int sd_read_raw_address_debug(uint32_t address, uint8_t *buffer);
 
 static void sd_debug_print(const char *text)
 {
@@ -69,80 +66,6 @@ static uint32_t sd_ld_dword(const uint8_t *data)
     return (uint32_t)data[0] | ((uint32_t)data[1] << 8) | ((uint32_t)data[2] << 16) | ((uint32_t)data[3] << 24);
 }
 
-static void sd_debug_dump_sector_prefix(const uint8_t *sector)
-{
-    char line[160];
-
-    if (!g_sd_debug_enabled || g_sd_debug_printer == 0)
-        return;
-
-    sprintf(line,
-            "[fs] sector0 first32=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\r\n",
-            sector[0], sector[1], sector[2], sector[3], sector[4], sector[5], sector[6], sector[7],
-            sector[8], sector[9], sector[10], sector[11], sector[12], sector[13], sector[14], sector[15],
-            sector[16], sector[17], sector[18], sector[19], sector[20], sector[21], sector[22], sector[23],
-            sector[24], sector[25], sector[26], sector[27], sector[28], sector[29], sector[30], sector[31]);
-    g_sd_debug_printer(line);
-}
-
-static void sd_debug_dump_regs(const char *tag)
-{
-    char line[160];
-
-    if (!g_sd_debug_enabled || g_sd_debug_printer == 0)
-        return;
-
-    sprintf(line, "[sd] %s CLKCR=0x%08lX DCTRL=0x%08lX DCOUNT=%lu FIFOCNT=%lu STA=0x%08lX highcap=%d\r\n",
-            tag,
-            (unsigned long)SDIO->CLKCR,
-            (unsigned long)SDIO->DCTRL,
-            (unsigned long)SDIO->DCOUNT,
-            (unsigned long)SDIO->FIFOCNT,
-            (unsigned long)SDIO->STA,
-            g_sd_high_capacity);
-    g_sd_debug_printer(line);
-}
-static void sd_debug_dump_probe(const char *tag, uint32_t address, const uint8_t *sector, int result)
-{
-    char line[180];
-
-    if (!g_sd_debug_enabled || g_sd_debug_printer == 0)
-        return;
-
-    sprintf(line,
-            "[sd] probe %s addr=0x%08lX ret=%d r1=0x%08lX sig=%02X%02X first16=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\r\n",
-            tag,
-            (unsigned long)address,
-            result,
-            (unsigned long)g_sd_last_resp1,
-            sector[511], sector[510],
-            sector[0], sector[1], sector[2], sector[3], sector[4], sector[5], sector[6], sector[7],
-            sector[8], sector[9], sector[10], sector[11], sector[12], sector[13], sector[14], sector[15]);
-    g_sd_debug_printer(line);
-}
-
-static void sd_debug_probe_addresses(void)
-{
-    static uint8_t probe_sector[512];
-    static int probed;
-    int result;
-
-    if (probed)
-        return;
-    probed = 1;
-
-    result = sd_read_raw_address_debug(0U, probe_sector);
-    sd_debug_dump_probe("raw0", 0U, probe_sector, result);
-
-    result = sd_read_raw_address_debug(1U, probe_sector);
-    sd_debug_dump_probe("raw1", 1U, probe_sector, result);
-
-    result = sd_read_raw_address_debug(512U, probe_sector);
-    sd_debug_dump_probe("raw512", 512U, probe_sector, result);
-
-    result = sd_read_raw_address_debug(8192U, probe_sector);
-    sd_debug_dump_probe("raw8192", 8192U, probe_sector, result);
-}
 static void sd_debug_sector0(const uint8_t *sector)
 {
     char line[180];
@@ -162,9 +85,6 @@ static void sd_debug_sector0(const uint8_t *sector)
             (unsigned long)g_sd_read_count,
             (unsigned long)g_sd_read_error_count);
     g_sd_debug_printer(line);
-    sd_debug_dump_sector_prefix(sector);
-    sd_debug_dump_regs("sector0");
-    sd_debug_probe_addresses();
 }
 
 static void sd_delay(volatile uint32_t count)
@@ -430,9 +350,8 @@ static int sd_read_data_polling(uint8_t *buffer)
 {
     uint32_t idx = 0;
     uint32_t sta;
-    uint32_t timeout = SD_READ_LOOP_TIMEOUT;
 
-    while (timeout-- && idx < SDCARD_SECTOR_SIZE)
+    while (1)
     {
         sta = SDIO->STA;
         g_sd_last_sta = sta;
@@ -444,16 +363,17 @@ static int sd_read_data_polling(uint8_t *buffer)
             return SDCARD_ERR_IO;
         }
 
-        while ((SDIO->STA & SDIO_FLAG_RXDAVL) && idx < SDCARD_SECTOR_SIZE)
+        if ((sta & SDIO_FLAG_RXDAVL) && idx < SDCARD_SECTOR_SIZE)
         {
             uint32_t word = SDIO_ReadData();
             buffer[idx++] = (uint8_t)(word & 0xFFU);
             buffer[idx++] = (uint8_t)((word >> 8) & 0xFFU);
             buffer[idx++] = (uint8_t)((word >> 16) & 0xFFU);
             buffer[idx++] = (uint8_t)((word >> 24) & 0xFFU);
+            continue;
         }
 
-        if ((SDIO->STA & SDIO_FLAG_DATAEND) && idx >= SDCARD_SECTOR_SIZE)
+        if (sta & SDIO_FLAG_DATAEND)
         {
             SDIO_ClearFlag(SDIO_FLAG_DATAEND);
             break;
@@ -462,11 +382,10 @@ static int sd_read_data_polling(uint8_t *buffer)
 
     if (idx != SDCARD_SECTOR_SIZE)
     {
-        g_sd_last_error = timeout == 0U ? "data wait timeout" : "short sector read";
+        g_sd_last_error = "short sector read";
         return SDCARD_ERR_IO;
     }
 
-    SDIO_ClearFlag(SDIO_FLAG_DATAEND | SDIO_FLAG_DBCKEND);
     return SDCARD_OK;
 }
 
@@ -532,9 +451,6 @@ int sdcard_stub_init(void)
     if (result != SDCARD_OK)
         return SDCARD_ERR_RESP;
 
-    sd_sdio_clock_config(16U, SDIO_BusWide_1b);
-    sd_debug_print("[sd] transfer clock div=16 bus=1-bit\r\n");
-
     g_sd_ready = 1;
     g_sd_last_error = "ok";
     sd_debug_print("[sd] init ok\r\n");
@@ -552,38 +468,6 @@ int sdcard_stub_is_ready(void)
     return g_sd_ready;
 }
 
-static int sd_read_raw_address_debug(uint32_t address, uint8_t *buffer)
-{
-    SDIO_DataInitTypeDef data;
-    int result;
-    int attempt;
-
-    for (attempt = 0; attempt < 3; ++attempt)
-    {
-        sd_clear_data_path();
-
-        data.SDIO_DataTimeOut = SD_DATA_TIMEOUT;
-        data.SDIO_DataLength = SDCARD_SECTOR_SIZE;
-        data.SDIO_DataBlockSize = SDIO_DataBlockSize_512b;
-        data.SDIO_TransferDir = SDIO_TransferDir_ToSDIO;
-        data.SDIO_TransferMode = SDIO_TransferMode_Block;
-        data.SDIO_DPSM = SDIO_DPSM_Enable;
-        SDIO_DataConfig(&data);
-
-        sd_send_command(address, SD_CMD_READ_SINGLE_BLOCK, SDIO_Response_Short);
-        if (sd_wait_cmd_response(SD_CMD_READ_SINGLE_BLOCK, 0, 1) != SDCARD_OK)
-        {
-            result = SDCARD_ERR_RESP;
-            continue;
-        }
-
-        result = sd_read_data_polling(buffer);
-        if (result == SDCARD_OK)
-            return SDCARD_OK;
-    }
-
-    return result;
-}
 int sdcard_stub_read_sector(uint32_t sector, uint8_t *buffer)
 {
     SDIO_DataInitTypeDef data;
