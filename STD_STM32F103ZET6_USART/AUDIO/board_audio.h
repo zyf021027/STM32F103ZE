@@ -52,6 +52,9 @@ typedef struct
     uint32_t gpioc_odr;
     uint32_t rcc_cfgr;
     uint32_t gpio_amp_state;
+    uint32_t dma_underruns;
+    uint32_t dma_used_halfwords;
+    uint32_t dma_write_index;
     int last_error;
     int last_mode;
 } board_audio_debug_info_t;
@@ -64,6 +67,7 @@ void board_audio_amp_set(int enabled);
 void board_audio_amp_set_pin_high(int high);
 int board_audio_play_test_tone(uint32_t duration_ms);
 int board_audio_play_pcm(const int16_t *pcm, uint32_t samples, uint32_t channels);
+void board_audio_drain(void);
 int board_audio_capture_pcm(int16_t *pcm, uint32_t samples, uint32_t channels);
 const board_audio_debug_info_t *board_audio_get_debug_info(void);
 

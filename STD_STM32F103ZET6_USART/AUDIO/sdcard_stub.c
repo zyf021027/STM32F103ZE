@@ -532,8 +532,8 @@ int sdcard_stub_init(void)
     if (result != SDCARD_OK)
         return SDCARD_ERR_RESP;
 
-    sd_sdio_clock_config(4U, SDIO_BusWide_1b);
-    sd_debug_print("[sd] transfer clock div=4 bus=1-bit\r\n");
+    sd_sdio_clock_config(16U, SDIO_BusWide_1b);
+    sd_debug_print("[sd] transfer clock div=16 bus=1-bit\r\n");
 
     g_sd_ready = 1;
     g_sd_last_error = "ok";

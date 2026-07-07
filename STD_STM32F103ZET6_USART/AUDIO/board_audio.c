@@ -31,6 +31,18 @@
 #define AUDIO_MODE_NONE 0
 #define AUDIO_MODE_PLAYBACK 1
 #define AUDIO_MODE_RECORD 2
+#define AUDIO_DMA_BUFFER_HALFWORDS 4096U
+#define AUDIO_DMA_PREROLL_HALFWORDS 1024U
+#define AUDIO_DMA_GUARD_HALFWORDS 32U
+#define AUDIO_DMA_CHANNEL DMA2_Channel2
+static int16_t g_audio_dma_buffer[AUDIO_DMA_BUFFER_HALFWORDS];
+static uint32_t g_audio_dma_write_index;
+static uint32_t g_audio_dma_last_read_index;
+static uint32_t g_audio_dma_read_wraps;
+static uint32_t g_audio_dma_read_total;
+static uint32_t g_audio_dma_write_total;
+static int g_audio_dma_started;
+static uint32_t g_audio_dma_underruns;
 
 static const int16_t audio_test_wave[AUDIO_TEST_TABLE_SIZE] = {
     0, 1566, 3105, 4592, 6000, 7308, 8485, 9510,
@@ -51,6 +63,13 @@ static int16_t board_audio_apply_volume(int16_t sample)
     return (int16_t)value;
 }
 static board_audio_debug_info_t g_audio_debug;
+static uint32_t board_audio_dma_used_halfwords(void);
+static void board_audio_update_dma_debug(void)
+{
+    g_audio_debug.dma_underruns = g_audio_dma_underruns;
+    g_audio_debug.dma_used_halfwords = board_audio_dma_used_halfwords();
+    g_audio_debug.dma_write_index = g_audio_dma_write_index;
+}
 static uint8_t g_es8311_addr_write = ES8311_I2C_ADDR_WRITE_LOW;
 
 static void audio_delay_short(void)
@@ -272,6 +291,7 @@ static void board_audio_capture_debug_regs(void)
     g_audio_debug.gpioc_odr = GPIOC->ODR;
     g_audio_debug.rcc_cfgr = RCC->CFGR;
     g_audio_debug.gpio_amp_state = GPIO_ReadOutputDataBit(AUDIO_AMP_PORT, AUDIO_AMP_PIN);
+    board_audio_update_dma_debug();
 }
 
 static int es8311_probe_addr(uint8_t addr)
@@ -307,6 +327,7 @@ static void board_audio_gpio_init(void)
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI3, ENABLE);
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2, ENABLE);
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
     gpio.GPIO_Speed = GPIO_Speed_50MHz;
@@ -339,6 +360,149 @@ static void board_audio_gpio_init(void)
     GPIO_Init(AUDIO_I2S_RX_PORT, &gpio);
 }
 
+static void board_audio_write_frame(int16_t left, int16_t right);
+static void board_audio_dma_stop(void);
+static void board_audio_dma_start(void);
+
+static uint32_t board_audio_dma_read_index(void)
+{
+    uint32_t remaining;
+
+    if (!g_audio_dma_started)
+        return 0U;
+
+    remaining = DMA_GetCurrDataCounter(AUDIO_DMA_CHANNEL);
+    if (remaining > AUDIO_DMA_BUFFER_HALFWORDS)
+        remaining = AUDIO_DMA_BUFFER_HALFWORDS;
+    return (AUDIO_DMA_BUFFER_HALFWORDS - remaining) % AUDIO_DMA_BUFFER_HALFWORDS;
+}
+
+static uint32_t board_audio_dma_update_read_total(void)
+{
+    uint32_t read_index = board_audio_dma_read_index();
+
+    if (read_index < g_audio_dma_last_read_index)
+        g_audio_dma_read_wraps++;
+    g_audio_dma_last_read_index = read_index;
+    g_audio_dma_read_total = (g_audio_dma_read_wraps * AUDIO_DMA_BUFFER_HALFWORDS) + read_index;
+    return g_audio_dma_read_total;
+}
+
+static uint32_t board_audio_dma_used_halfwords(void)
+{
+    uint32_t read_total = board_audio_dma_update_read_total();
+
+    if (g_audio_dma_write_total <= read_total)
+        return 0U;
+    return g_audio_dma_write_total - read_total;
+}
+
+static uint32_t board_audio_dma_free_halfwords(void)
+{
+    uint32_t used = board_audio_dma_used_halfwords();
+
+    if (used >= (AUDIO_DMA_BUFFER_HALFWORDS - AUDIO_DMA_GUARD_HALFWORDS))
+        return 0U;
+    return AUDIO_DMA_BUFFER_HALFWORDS - used - AUDIO_DMA_GUARD_HALFWORDS;
+}
+
+static void board_audio_dma_recover_if_underrun(void)
+{
+    uint32_t read_total = board_audio_dma_update_read_total();
+
+    if (g_audio_dma_write_total <= read_total)
+    {
+        g_audio_dma_underruns++;
+        memset(g_audio_dma_buffer, 0, sizeof(g_audio_dma_buffer));
+        g_audio_dma_write_total = read_total + AUDIO_DMA_PREROLL_HALFWORDS;
+        g_audio_dma_write_index = g_audio_dma_write_total % AUDIO_DMA_BUFFER_HALFWORDS;
+    }
+}
+
+static void board_audio_dma_wait_free(uint32_t halfwords)
+{
+    while (board_audio_dma_free_halfwords() < halfwords)
+    {
+        board_audio_dma_recover_if_underrun();
+        __NOP();
+    }
+}
+
+static void board_audio_dma_write_frame(int16_t left, int16_t right)
+{
+    if (!g_audio_dma_started)
+    {
+        board_audio_write_frame(left, right);
+        return;
+    }
+
+    board_audio_dma_wait_free(2U);
+    board_audio_dma_recover_if_underrun();
+    g_audio_dma_buffer[g_audio_dma_write_index] = left;
+    g_audio_dma_write_index = (g_audio_dma_write_index + 1U) % AUDIO_DMA_BUFFER_HALFWORDS;
+    g_audio_dma_write_total++;
+    g_audio_dma_buffer[g_audio_dma_write_index] = right;
+    g_audio_dma_write_index = (g_audio_dma_write_index + 1U) % AUDIO_DMA_BUFFER_HALFWORDS;
+    g_audio_dma_write_total++;
+    g_audio_debug.tx_frames++;
+}
+
+static void board_audio_dma_stop(void)
+{
+    SPI_I2S_DMACmd(SPI3, SPI_I2S_DMAReq_Tx, DISABLE);
+    DMA_Cmd(AUDIO_DMA_CHANNEL, DISABLE);
+    g_audio_dma_started = 0;
+    g_audio_dma_write_index = 0U;
+    g_audio_dma_last_read_index = 0U;
+    g_audio_dma_read_wraps = 0U;
+    g_audio_dma_read_total = 0U;
+    g_audio_dma_write_total = 0U;
+}
+
+static void board_audio_dma_start(void)
+{
+    DMA_InitTypeDef dma;
+    uint32_t read_index;
+
+    memset(g_audio_dma_buffer, 0, sizeof(g_audio_dma_buffer));
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA2, ENABLE);
+    DMA_Cmd(AUDIO_DMA_CHANNEL, DISABLE);
+    DMA_DeInit(AUDIO_DMA_CHANNEL);
+
+    dma.DMA_PeripheralBaseAddr = (uint32_t)&SPI3->DR;
+    dma.DMA_MemoryBaseAddr = (uint32_t)g_audio_dma_buffer;
+    dma.DMA_DIR = DMA_DIR_PeripheralDST;
+    dma.DMA_BufferSize = AUDIO_DMA_BUFFER_HALFWORDS;
+    dma.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    dma.DMA_MemoryInc = DMA_MemoryInc_Enable;
+    dma.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+    dma.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+    dma.DMA_Mode = DMA_Mode_Circular;
+    dma.DMA_Priority = DMA_Priority_High;
+    dma.DMA_M2M = DMA_M2M_Disable;
+    DMA_Init(AUDIO_DMA_CHANNEL, &dma);
+
+    SPI_I2S_DMACmd(SPI3, SPI_I2S_DMAReq_Tx, ENABLE);
+    DMA_Cmd(AUDIO_DMA_CHANNEL, ENABLE);
+    g_audio_dma_started = 1;
+    read_index = board_audio_dma_read_index();
+    g_audio_dma_last_read_index = read_index;
+    g_audio_dma_read_wraps = 0U;
+    g_audio_dma_read_total = read_index;
+    g_audio_dma_write_total = g_audio_dma_read_total + AUDIO_DMA_PREROLL_HALFWORDS;
+    g_audio_dma_write_index = g_audio_dma_write_total % AUDIO_DMA_BUFFER_HALFWORDS;
+}
+
+static void board_audio_dma_drain(void)
+{
+    uint32_t timeout = AUDIO_DMA_BUFFER_HALFWORDS * 4U;
+
+    while (board_audio_dma_used_halfwords() > AUDIO_DMA_PREROLL_HALFWORDS && timeout-- > 0U)
+    {
+        __NOP();
+    }
+}
+
 static uint32_t board_audio_i2s_freq(uint32_t sample_rate)
 {
     if (sample_rate >= 43000U && sample_rate <= 45000U)
@@ -350,6 +514,7 @@ static void board_audio_i2s_init_tx_rate(uint32_t sample_rate)
 {
     I2S_InitTypeDef i2s;
 
+    board_audio_dma_stop();
     SPI_I2S_DeInit(SPI3);
     i2s.I2S_Mode = I2S_Mode_MasterTx;
     i2s.I2S_Standard = I2S_Standard_Phillips;
@@ -359,6 +524,7 @@ static void board_audio_i2s_init_tx_rate(uint32_t sample_rate)
     i2s.I2S_CPOL = I2S_CPOL_Low;
     I2S_Init(SPI3, &i2s);
     I2S_Cmd(SPI3, ENABLE);
+    board_audio_dma_start();
     g_audio_debug.last_sample_rate = sample_rate;
     g_audio_debug.spi3_sr = SPI3->SR;
     g_audio_debug.spi3_i2scfgr = SPI3->I2SCFGR;
@@ -412,14 +578,17 @@ static int board_audio_codec_init_playback(void)
     result |= es8311_write_reg(0x0A, 0x4C);
     result |= es8311_write_reg(0x44, 0x08);
     result |= es8311_write_reg(0x31, 0x00);
-    result |= es8311_write_reg(0x32, 0xFF);
+    result |= es8311_write_reg(0x32, 0xBF);
     result |= es8311_write_reg(0x33, 0x00);
     result |= es8311_write_reg(0x34, 0x00);
+    result |= es8311_write_reg(0x0D, 0x01);
+    audio_delay_ms(120);
     result |= es8311_write_reg(0x0E, 0x02);
     result |= es8311_write_reg(0x12, 0x01);
     result |= es8311_write_reg(0x13, 0x10);
     result |= es8311_write_reg(0x14, 0x1A);
     result |= es8311_write_reg(0x0D, 0x06);
+    audio_delay_ms(30);
     result |= es8311_write_reg(0x25, 0x00);
     result |= es8311_write_reg(0x01, 0x3F);
     board_audio_capture_debug_regs();
@@ -562,23 +731,35 @@ int board_audio_play_pcm(const int16_t *pcm, uint32_t samples, uint32_t channels
     g_audio_debug.spi3_sr = SPI3->SR;
     g_audio_debug.spi3_i2scfgr = SPI3->I2SCFGR;
     g_audio_debug.gpio_amp_state = GPIO_ReadOutputDataBit(AUDIO_AMP_PORT, AUDIO_AMP_PIN);
+    board_audio_update_dma_debug();
 
     if (channels == 1U)
     {
         for (i = 0; i < samples; ++i)
-            board_audio_write_frame(board_audio_apply_volume(pcm[i]), board_audio_apply_volume(pcm[i]));
+            board_audio_dma_write_frame(board_audio_apply_volume(pcm[i]), board_audio_apply_volume(pcm[i]));
+        board_audio_update_dma_debug();
         return 0;
     }
 
     if (channels == 2U)
     {
         for (i = 0; i < samples; ++i)
-            board_audio_write_frame(board_audio_apply_volume(pcm[i * 2U]), board_audio_apply_volume(pcm[i * 2U + 1U]));
+        {
+            int32_t mixed = ((int32_t)pcm[i * 2U] + (int32_t)pcm[i * 2U + 1U]) / 2;
+            int16_t sample = board_audio_apply_volume((int16_t)mixed);
+            board_audio_dma_write_frame(sample, sample);
+        }
+        board_audio_update_dma_debug();
         return 0;
     }
 
     board_audio_set_error(-4);
     return -2;
+}
+
+void board_audio_drain(void)
+{
+    board_audio_dma_drain();
 }
 
 int board_audio_capture_pcm(int16_t *pcm, uint32_t samples, uint32_t channels)
@@ -624,7 +805,7 @@ int board_audio_play_test_tone(uint32_t duration_ms)
     uint32_t index;
 
     for (index = 0; index < total_samples; ++index)
-        board_audio_write_frame(board_audio_apply_volume(audio_test_wave[index % AUDIO_TEST_TABLE_SIZE]), board_audio_apply_volume(audio_test_wave[index % AUDIO_TEST_TABLE_SIZE]));
+        board_audio_dma_write_frame(board_audio_apply_volume(audio_test_wave[index % AUDIO_TEST_TABLE_SIZE]), board_audio_apply_volume(audio_test_wave[index % AUDIO_TEST_TABLE_SIZE]));
     return 0;
 }
 

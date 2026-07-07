@@ -9,27 +9,47 @@
 #include "sdcard_stub.h"
 
 #define DEMO_FILE_PATH_BUFFER_SIZE 13U
-#define ENABLE_RECORD_DEMO 1
+#define ENABLE_RECORD_DEMO 0
 
 static void dump_player_stats(void)
 {
     const audio_player_stats_t *stats = audio_player_get_stats();
 
-    printf("[mp3] bytes_read=%lu decode_calls=%lu frames_decoded=%lu frames_skipped=%lu pcm_blocks=%lu sr=%lu ch=%lu\r\n",
+    uint32_t gap_pct = 0U;
+
+    if (stats->total_audio_ms > 0U)
+        gap_pct = (uint32_t)(((uint64_t)(stats->read_time_us + stats->decode_time_us) * 100ULL) / ((uint64_t)stats->total_audio_ms * 1000ULL));
+
+    printf("[mp3] bytes=%lu calls=%lu frames=%lu skipped=%lu pcm_blocks=%lu sr=%lu ch=%lu layer=%lu kbps=%lu frame_bytes=%lu samples=%lu first_off=%lu\r\n",
            (unsigned long)stats->bytes_read,
            (unsigned long)stats->decode_calls,
            (unsigned long)stats->frames_decoded,
            (unsigned long)stats->frames_skipped,
            (unsigned long)stats->pcm_blocks_sent,
            (unsigned long)stats->last_sample_rate,
-           (unsigned long)stats->last_channels);
+           (unsigned long)stats->last_channels,
+           (unsigned long)stats->last_layer,
+           (unsigned long)stats->last_bitrate_kbps,
+           (unsigned long)stats->last_frame_bytes,
+           (unsigned long)stats->last_samples_per_frame,
+           (unsigned long)stats->first_frame_offset);
+    printf("[mp3-time] audio_ms=%lu read_us=%lu decode_us=%lu pcm_us=%lu wall_us=%lu max_read_us=%lu max_decode_us=%lu max_pcm_us=%lu gap_pct=%lu\r\n",
+           (unsigned long)stats->total_audio_ms,
+           (unsigned long)stats->read_time_us,
+           (unsigned long)stats->decode_time_us,
+           (unsigned long)stats->pcm_time_us,
+           (unsigned long)stats->total_wall_us,
+           (unsigned long)stats->max_read_us,
+           (unsigned long)stats->max_decode_us,
+           (unsigned long)stats->max_pcm_us,
+           (unsigned long)gap_pct);
 }
 
 static void dump_board_audio_debug(const char *tag)
 {
     const board_audio_debug_info_t *dbg = board_audio_get_debug_info();
 
-    printf("[%s] mode=%d tx_frames=%lu rx_frames=%lu sr=%lu ch=%lu codec_addr=0x%02lX fail_reg=0x%02lX amp_pc13=%lu last_error=%d\r\n",
+    printf("[%s] mode=%d tx_frames=%lu rx_frames=%lu sr=%lu ch=%lu codec_addr=0x%02lX fail_reg=0x%02lX amp_pc13=%lu dma_under=%lu dma_used=%lu dma_w=%lu last_error=%d\r\n",
            tag,
            dbg->last_mode,
            (unsigned long)dbg->tx_frames,
@@ -39,6 +59,9 @@ static void dump_board_audio_debug(const char *tag)
            (unsigned long)dbg->codec_addr,
            (unsigned long)dbg->codec_fail_reg,
            (unsigned long)dbg->gpio_amp_state,
+           (unsigned long)dbg->dma_underruns,
+           (unsigned long)dbg->dma_used_halfwords,
+           (unsigned long)dbg->dma_write_index,
            dbg->last_error);
     printf("[%s-codec-a] r00=%02lX r01=%02lX r02=%02lX r03=%02lX r04=%02lX r05=%02lX r06=%02lX r07=%02lX r08=%02lX r09=%02lX r0A=%02lX r0B=%02lX r0C=%02lX\r\n",
            tag,
@@ -92,6 +115,7 @@ static void debug_print_text(const char *text)
     printf("%s", text);
 }
 
+#if ENABLE_RECORD_DEMO
 static void dump_record_debug(void)
 {
     const audio_record_debug_info_t *dbg = audio_record_get_debug_info();
@@ -102,6 +126,7 @@ static void dump_record_debug(void)
            (unsigned long)dbg->sample_rate,
            dbg->last_result);
 }
+#endif
 
 int main(void)
 {
@@ -121,6 +146,7 @@ int main(void)
     sdcard_stub_set_debug(1, debug_print_text);
     audio_player_set_debug(1, debug_print_text);
 
+    printf("[audio-demo] init start\r\n");
     init_result = audio_player_init();
     printf("[audio-demo] audio_player_init=%d err=%s\r\n", init_result, audio_player_last_error());
     dump_board_audio_debug("audio-init");
@@ -129,11 +155,6 @@ int main(void)
         while (1)
             delay_ms(1000);
     }
-
-    printf("[audio-demo] amp PC13 low/enabled, play 1s test tone\r\n");
-    board_audio_amp_set(1);
-    board_audio_play_test_tone(1000);
-    dump_board_audio_debug("test-tone-enabled");
 
     board_audio_amp_set(1);
 

@@ -15,6 +15,20 @@ typedef struct
     uint32_t pcm_blocks_sent;
     uint32_t last_sample_rate;
     uint32_t last_channels;
+    uint32_t last_layer;
+    uint32_t last_bitrate_kbps;
+    uint32_t last_frame_bytes;
+    uint32_t last_samples_per_frame;
+    uint32_t first_frame_offset;
+    uint32_t total_audio_ms;
+    uint32_t read_time_us;
+    uint32_t decode_time_us;
+    uint32_t pcm_time_us;
+    uint32_t total_wall_us;
+    uint32_t max_read_us;
+    uint32_t max_decode_us;
+    uint32_t max_pcm_us;
+    int32_t last_decode_error;
 } audio_player_stats_t;
 
 int audio_player_init(void);
