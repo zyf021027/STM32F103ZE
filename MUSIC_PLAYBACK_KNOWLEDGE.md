@@ -80,13 +80,13 @@ SD 卡
 
 当前 I2S3 引脚定义在 `board_audio.c`：
 
-| 功能 | STM32 引脚 | 说明 |
-|---|---:|---|
-| MCLK | PC7 | ES8311 主时钟 |
-| BCLK / CK | PB3 | I2S 位时钟 |
-| LRCK / WS | PA15 | 左右声道选择时钟 |
-| SD / TX | PB5 | STM32 发给 ES8311 的音频数据 |
-| RX / ASDOUT | PB4 | ES8311 发回 STM32 的录音数据，播放时不是关键路径 |
+| 功能        | STM32 引脚 | 说明                                             |
+| ----------- | ---------: | ------------------------------------------------ |
+| MCLK        |        PC7 | ES8311 主时钟                                    |
+| BCLK / CK   |        PB3 | I2S 位时钟                                       |
+| LRCK / WS   |       PA15 | 左右声道选择时钟                                 |
+| SD / TX     |        PB5 | STM32 发给 ES8311 的音频数据                     |
+| RX / ASDOUT |        PB4 | ES8311 发回 STM32 的录音数据，播放时不是关键路径 |
 
 注意：PB3 和 PA15 默认与 JTAG 功能相关。当前代码通过：
 
@@ -101,16 +101,16 @@ GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 当前 ES8311 配置使用软件模拟 I2C：
 
 | 功能 | STM32 引脚 |
-|---|---:|
-| SCL | PB6 |
-| SDA | PB7 |
+| ---- | ---------: |
+| SCL  |        PB6 |
+| SDA  |        PB7 |
 
 ES8311 地址当前探测两个写地址：
 
-| 写地址 | 说明 |
-|---:|---|
+|   写地址 | 说明             |
+| -------: | ---------------- |
 | `0x30` | 常见 ES8311 地址 |
-| `0x32` | 备用地址 |
+| `0x32` | 备用地址         |
 
 读地址由写地址加 `0x01` 得到。
 
@@ -119,9 +119,9 @@ ES8311 地址当前探测两个写地址：
 本工程里 PC13 控制功放使能，但硬件中间有 SS8050 三极管反相。因此逻辑必须按原理图理解：
 
 | PC13 电平 | 功放状态 |
-|---:|---|
-| 低电平 | 使能 |
-| 高电平 | 关闭 |
+| --------: | -------- |
+|    低电平 | 使能     |
+|    高电平 | 关闭     |
 
 当前代码定义：
 
@@ -143,12 +143,12 @@ ES8311 地址当前探测两个写地址：
 
 播放时 STM32 是 I2S 主机，ES8311 是 I2S 从机。
 
-| 信号 | 含义 |
-|---|---|
-| MCLK | 主时钟，供 Codec 内部 PLL/采样系统使用 |
-| BCLK | 位时钟，每传输一位数据跳变一次 |
-| LRCK/WS | 左右声道选择，频率等于采样率 |
-| SD | 串行音频数据 |
+| 信号    | 含义                                   |
+| ------- | -------------------------------------- |
+| MCLK    | 主时钟，供 Codec 内部 PLL/采样系统使用 |
+| BCLK    | 位时钟，每传输一位数据跳变一次         |
+| LRCK/WS | 左右声道选择，频率等于采样率           |
+| SD      | 串行音频数据                           |
 
 ### 3.2 采样率和时钟关系
 
@@ -293,17 +293,17 @@ ACMD6
 
 关键命令含义：
 
-| 命令 | 作用 |
-|---|---|
-| CMD0 | 复位 SD 卡进入 idle |
-| CMD8 | 检查 SD 版本和电压范围 |
-| ACMD41 | 初始化并等待卡 ready |
-| CMD2 | 读取 CID |
-| CMD3 | 获取 RCA |
-| CMD7 | 选中卡 |
-| CMD16 | 设置块长度 512 字节 |
-| ACMD6 | 设置总线宽度，当前工程保持 1-bit |
-| CMD17 | 读取单个 512 字节扇区 |
+| 命令   | 作用                             |
+| ------ | -------------------------------- |
+| CMD0   | 复位 SD 卡进入 idle              |
+| CMD8   | 检查 SD 版本和电压范围           |
+| ACMD41 | 初始化并等待卡 ready             |
+| CMD2   | 读取 CID                         |
+| CMD3   | 获取 RCA                         |
+| CMD7   | 选中卡                           |
+| CMD16  | 设置块长度 512 字节              |
+| ACMD6  | 设置总线宽度，当前工程保持 1-bit |
+| CMD17  | 读取单个 512 字节扇区            |
 
 当前传输模式：
 
@@ -399,12 +399,12 @@ MP3 文件字节流
 
 主要 API：
 
-| API | 作用 |
-|---|---|
-| `MP3InitDecoder()` | 初始化解码器 |
-| `MP3FreeDecoder()` | 释放/重置解码器 |
-| `MP3FindSyncWord()` | 在字节流里寻找 MP3 帧同步头 |
-| `MP3Decode()` | 解码一帧 MP3 |
+| API                       | 作用                                 |
+| ------------------------- | ------------------------------------ |
+| `MP3InitDecoder()`      | 初始化解码器                         |
+| `MP3FreeDecoder()`      | 释放/重置解码器                      |
+| `MP3FindSyncWord()`     | 在字节流里寻找 MP3 帧同步头          |
+| `MP3Decode()`           | 解码一帧 MP3                         |
 | `MP3GetLastFrameInfo()` | 获取上一帧采样率、声道数、码率等信息 |
 
 当前 MP3 解码主循环在：
@@ -467,11 +467,11 @@ gap_pct = (read_time_us + decode_time_us) / audio_time_us * 100%
 
 判断原则：
 
-| gap_pct | 含义 |
-|---:|---|
-| 明显小于 100 | 解码速度快于播放速度，正常 |
-| 接近 100 | 余量很小，可能偶发卡顿 |
-| 大于 100 | 软件处理慢于实时播放，必然卡顿 |
+|      gap_pct | 含义                           |
+| -----------: | ------------------------------ |
+| 明显小于 100 | 解码速度快于播放速度，正常     |
+|     接近 100 | 余量很小，可能偶发卡顿         |
+|     大于 100 | 软件处理慢于实时播放，必然卡顿 |
 
 ## 7. PCM 数据处理
 
@@ -615,11 +615,11 @@ dma_w
 
 判断原则：
 
-| 指标 | 正常情况 |
-|---|---|
+| 指标          | 正常情况           |
+| ------------- | ------------------ |
 | `dma_under` | 播放期间最好不增加 |
-| `dma_used` | 不应长期接近 0 |
-| `dma_w` | 播放时应持续变化 |
+| `dma_used`  | 不应长期接近 0     |
+| `dma_w`     | 播放时应持续变化   |
 
 ### 8.4 预填充的意义
 
@@ -767,52 +767,52 @@ Helix 负责：
 
 `audio_player_stats_t` 包含：
 
-| 字段 | 含义 |
-|---|---|
-| `bytes_read` | 从 MP3 文件读取的字节数 |
-| `decode_calls` | 调用 `MP3Decode()` 的次数 |
-| `frames_decoded` | 成功解码的 MP3 帧数 |
-| `frames_skipped` | 跳过或错误的帧数 |
-| `pcm_blocks_sent` | 送到音频输出的 PCM 块数 |
-| `last_sample_rate` | 最近一帧采样率 |
-| `last_channels` | 最近一帧声道数 |
-| `last_layer` | MP3 layer |
-| `last_bitrate_kbps` | 最近一帧码率 |
-| `last_frame_bytes` | 最近一帧消耗的字节数 |
-| `last_samples_per_frame` | 最近一帧每声道采样数 |
-| `first_frame_offset` | 第一个有效 MP3 帧偏移 |
-| `total_audio_ms` | 已解码音频时长 |
-| `read_time_us` | 累计读文件耗时 |
-| `decode_time_us` | 累计解码耗时 |
-| `pcm_time_us` | 累计写 PCM 耗时 |
-| `max_decode_us` | 单次最大解码耗时 |
-| `last_decode_error` | 最近一次解码返回码 |
+| 字段                       | 含义                       |
+| -------------------------- | -------------------------- |
+| `bytes_read`             | 从 MP3 文件读取的字节数    |
+| `decode_calls`           | 调用`MP3Decode()` 的次数 |
+| `frames_decoded`         | 成功解码的 MP3 帧数        |
+| `frames_skipped`         | 跳过或错误的帧数           |
+| `pcm_blocks_sent`        | 送到音频输出的 PCM 块数    |
+| `last_sample_rate`       | 最近一帧采样率             |
+| `last_channels`          | 最近一帧声道数             |
+| `last_layer`             | MP3 layer                  |
+| `last_bitrate_kbps`      | 最近一帧码率               |
+| `last_frame_bytes`       | 最近一帧消耗的字节数       |
+| `last_samples_per_frame` | 最近一帧每声道采样数       |
+| `first_frame_offset`     | 第一个有效 MP3 帧偏移      |
+| `total_audio_ms`         | 已解码音频时长             |
+| `read_time_us`           | 累计读文件耗时             |
+| `decode_time_us`         | 累计解码耗时               |
+| `pcm_time_us`            | 累计写 PCM 耗时            |
+| `max_decode_us`          | 单次最大解码耗时           |
+| `last_decode_error`      | 最近一次解码返回码         |
 
 ### 11.2 板级音频统计
 
 `board_audio_debug_info_t` 包含：
 
-| 字段 | 含义 |
-|---|---|
-| `tx_frames` | 已送出的 I2S 音频帧数 |
-| `rx_frames` | 已接收的 I2S 音频帧数 |
-| `last_sample_rate` | 当前/最近采样率 |
-| `last_channels` | 最近输入 PCM 声道数 |
-| `codec_addr` | ES8311 I2C 写地址 |
-| `codec_fail_reg` | I2C 读写失败的寄存器 |
-| `codec_regXX` | ES8311 关键寄存器快照 |
-| `spi3_sr` | SPI3/I2S 状态寄存器 |
-| `spi3_i2scfgr` | I2S 配置寄存器 |
-| `spi3_i2spr` | I2S 分频寄存器 |
-| `spi3_cr2` | DMA 请求相关寄存器 |
-| `gpio*_idr` | GPIO 输入状态 |
-| `gpio*_odr` | GPIO 输出状态 |
-| `gpio_amp_state` | PC13 输出状态 |
-| `dma_underruns` | DMA 欠载次数 |
-| `dma_used_halfwords` | DMA 缓冲占用 |
-| `dma_write_index` | DMA 写指针 |
-| `last_error` | 板级音频错误码 |
-| `last_mode` | 当前模式，播放或录音 |
+| 字段                   | 含义                  |
+| ---------------------- | --------------------- |
+| `tx_frames`          | 已送出的 I2S 音频帧数 |
+| `rx_frames`          | 已接收的 I2S 音频帧数 |
+| `last_sample_rate`   | 当前/最近采样率       |
+| `last_channels`      | 最近输入 PCM 声道数   |
+| `codec_addr`         | ES8311 I2C 写地址     |
+| `codec_fail_reg`     | I2C 读写失败的寄存器  |
+| `codec_regXX`        | ES8311 关键寄存器快照 |
+| `spi3_sr`            | SPI3/I2S 状态寄存器   |
+| `spi3_i2scfgr`       | I2S 配置寄存器        |
+| `spi3_i2spr`         | I2S 分频寄存器        |
+| `spi3_cr2`           | DMA 请求相关寄存器    |
+| `gpio*_idr`          | GPIO 输入状态         |
+| `gpio*_odr`          | GPIO 输出状态         |
+| `gpio_amp_state`     | PC13 输出状态         |
+| `dma_underruns`      | DMA 欠载次数          |
+| `dma_used_halfwords` | DMA 缓冲占用          |
+| `dma_write_index`    | DMA 写指针            |
+| `last_error`         | 板级音频错误码        |
+| `last_mode`          | 当前模式，播放或录音  |
 
 ### 11.3 关键日志判断
 
@@ -1033,41 +1033,41 @@ CH3 -> PB5  SD
 
 异常判断：
 
-| 现象 | 可能原因 |
-|---|---|
-| 没有 MCLK | I2S MCLK 未开、引脚配置错误、外设未启动 |
-| 没有 BCLK/LRCK | SPI3/I2S 没启动、时钟没使能、引脚复用错误 |
+| 现象             | 可能原因                                                |
+| ---------------- | ------------------------------------------------------- |
+| 没有 MCLK        | I2S MCLK 未开、引脚配置错误、外设未启动                 |
+| 没有 BCLK/LRCK   | SPI3/I2S 没启动、时钟没使能、引脚复用错误               |
 | 有时钟但 SD 全 0 | 没有 PCM 写入、DMA 没启动、解码失败、音量或静音处理错误 |
-| SD 有数据但无声 | ES8311 配置或模拟输出硬件问题 |
-| LRCK 频率不对 | I2S 采样率设置或系统时钟配置问题 |
-| SD 数据断续 | DMA underrun、解码太慢、SD 读取太慢 |
+| SD 有数据但无声  | ES8311 配置或模拟输出硬件问题                           |
+| LRCK 频率不对    | I2S 采样率设置或系统时钟配置问题                        |
+| SD 数据断续      | DMA underrun、解码太慢、SD 读取太慢                     |
 
 ## 14. 当前最终有效配置总结
 
 当前能正常播放音乐的关键配置如下：
 
-| 项目 | 当前值 |
-|---|---|
-| MCU | STM32F103ZET6 |
-| Codec | ES8311 |
-| 存储 | SD 卡 |
-| 文件系统 | Petit FatFs |
-| 音频格式 | MP3 |
-| MP3 解码器 | Helix fixed-point MP3 decoder |
-| I2S 外设 | SPI3/I2S3 |
-| I2S 模式 | MasterTx |
-| I2S 标准 | Philips |
-| I2S 数据宽度 | 16 bit |
-| I2S MCLK | Enable |
-| PCM 输出 | 16 bit |
-| 声道策略 | 双声道转单声道后左右同发 |
-| 软件音量 | 10% |
-| DMA | DMA2_Channel2 circular |
-| DMA 缓冲 | 4096 halfwords |
-| 功放使能 | PC13 低电平有效 |
-| 编译优化 | O3 |
-| MP3 文件位置 | SD 根目录 |
-| 文件名建议 | 8.3 格式，例如 `TEST.MP3` |
+| 项目         | 当前值                        |
+| ------------ | ----------------------------- |
+| MCU          | STM32F103ZET6                 |
+| Codec        | ES8311                        |
+| 存储         | SD 卡                         |
+| 文件系统     | Petit FatFs                   |
+| 音频格式     | MP3                           |
+| MP3 解码器   | Helix fixed-point MP3 decoder |
+| I2S 外设     | SPI3/I2S3                     |
+| I2S 模式     | MasterTx                      |
+| I2S 标准     | Philips                       |
+| I2S 数据宽度 | 16 bit                        |
+| I2S MCLK     | Enable                        |
+| PCM 输出     | 16 bit                        |
+| 声道策略     | 双声道转单声道后左右同发      |
+| 软件音量     | 10%                           |
+| DMA          | DMA2_Channel2 circular        |
+| DMA 缓冲     | 4096 halfwords                |
+| 功放使能     | PC13 低电平有效               |
+| 编译优化     | O3                            |
+| MP3 文件位置 | SD 根目录                     |
+| 文件名建议   | 8.3 格式，例如`TEST.MP3`    |
 
 ## 15. 为什么当前方案能稳定播放
 
