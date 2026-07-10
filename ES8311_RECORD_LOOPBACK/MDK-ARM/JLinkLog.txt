@@ -1,0 +1,34 @@
+T5838 000:008.735   SEGGER J-Link V6.98e Log File
+T5838 000:008.855   DLL Compiled: Mar 29 2021 14:18:39
+T5838 000:008.860   Logging started @ 2026-07-03 03:03
+T5838 000:008.865 - 8.867ms
+T5838 000:008.876 JLINK_SetWarnOutHandler(...)
+T5838 000:008.881 - 0.007ms
+T5838 000:008.886 JLINK_OpenEx(...)
+T5838 000:010.134   Firmware: J-Link V9 compiled Oct 12 2012 BTL     
+T5838 000:010.473   Firmware: J-Link V9 compiled Oct 12 2012 BTL     
+T5838 000:010.618   Decompressing FW timestamp took 123 us
+T5838 000:014.091   Decompressing FW took 3458 us
+T5838 000:014.223   Looking for J-Link GUI Server exe at: C:\Keil_v5\ARM\Segger\JLinkGUIServer.exe
+T5838 000:014.301   Looking for J-Link GUI Server exe at: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T5838 000:014.329   Forking J-Link GUI Server: C:\Program Files (x86)\SEGGER\JLink\JLinkGUIServer.exe
+T5838 000:043.438   J-Link GUI Server info: "J-Link GUI server V6.98e "
+T5838 000:836.199   Updating firmware:  J-Link V9 compiled Feb  2 2021 16:34:10
+T5838 000:836.236   Replacing firmware: J-Link V9 compiled Oct 12 2012 BTL     
+T5838 002:735.374   Waiting for new firmware to boot
+T5838 005:818.780   
+  ***** Error: 
+T5838 005:818.801   Communication timed out: Requested 4 bytes, received 0 bytes !
+T5838 005:818.807   
+  ***** Error: 
+T5838 005:818.813   Could not read J-Link capabilities.
+T5838 005:818.877   
+  ***** Error: 
+T5838 005:818.884   Cannot connect to J-Link
+T5838 005:821.393 - 5812.521ms returns "Communication timed out: Requested 4 bytes, received 0 bytes !
+Could not read J-Link capabilities.
+Cannot connect to J-Link"
+T5838 008:853.606 JLINK_Close()
+T5838 008:863.994 - 10.401ms
+T5838 008:864.009   
+T5838 008:864.014   Closed
