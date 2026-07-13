@@ -37,8 +37,7 @@
 #define AUDIO_DMA_GUARD_HALFWORDS 32U
 #define AUDIO_DMA_CHANNEL DMA2_Channel2
 #define AUDIO_I2S_READ_TIMEOUT 1000000U
-#define AUDIO_RECORD_USE_SOFT_I2S_RX 1U
-#define AUDIO_RECORD_SOFT_AUTO_SELECT 1U
+#define AUDIO_RECORD_SOFT_AUTO_SELECT 0U
 #define AUDIO_I2S_SOFT_BCLK_TIMEOUT 20000U
 #define AUDIO_I2S_SOFT_LRCK_TIMEOUT 2000000U
 #define AUDIO_I2S_SOFT_SAMPLE_DELAY_NOPS 8U
@@ -935,7 +934,7 @@ static void board_audio_write_word(int16_t value)
     SPI_I2S_SendData(SPI3, (uint16_t)value);
 }
 
-#if !AUDIO_RECORD_USE_SOFT_I2S_RX
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_HARDWARE_SPI3
 static void board_audio_clear_rx_overrun(void)
 {
     volatile uint16_t discard;
@@ -1318,6 +1317,7 @@ static int board_audio_capture_soft_i2s_frame_variant(int16_t *left,
     return 0;
 }
 
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_SOFTWARE_PB4
 static int board_audio_capture_soft_i2s_frame(int16_t *left, int16_t *right)
 {
     uint32_t skip_edges;
@@ -1341,6 +1341,7 @@ static int board_audio_capture_soft_i2s_frame(int16_t *left, int16_t *right)
     g_audio_debug.rx_soft_frames++;
     return 0;
 }
+#endif
 static int board_audio_soft_variant_is_clean(const board_audio_soft_i2s_variant_info_t *variant)
 {
     uint32_t peak;
@@ -1597,7 +1598,7 @@ int board_audio_capture_mono_sample(int16_t *sample)
 
     g_audio_debug.last_channels = 1U;
     frame_index = g_audio_debug.rx_frames;
-#if AUDIO_RECORD_USE_SOFT_I2S_RX
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_SOFTWARE_PB4
     if (board_audio_capture_soft_i2s_frame(&left, &right) != 0)
         return -3;
 #else
@@ -1638,7 +1639,7 @@ int board_audio_capture_pcm(int16_t *pcm, uint32_t samples, uint32_t channels)
     for (i = 0; i < samples; ++i)
     {
         frame_index = g_audio_debug.rx_frames;
-#if AUDIO_RECORD_USE_SOFT_I2S_RX
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_SOFTWARE_PB4
         if (board_audio_capture_soft_i2s_frame(&left, &right) != 0)
             return -3;
 #else

@@ -53,7 +53,8 @@ static void dump_record_path_check(const char *tag, const board_audio_debug_info
     int adcdat_sel = (((dbg->codec_reg44 & 0x70U) == 0U) || ((dbg->codec_reg44 & 0x70U) == 0x50U));
     int audio_seen = (dbg->rx_left_abs_peak > 32U || dbg->rx_right_abs_peak > 32U);
 
-    printf("[%s-check] i2c=%s mcu_master_rx=%s codec_clks=%s adc_power=%s mic_path=%s adc_sdp=%s asdout_pin=%s adcdat_sel=%s spi_ovr=%s capture=PB%lu_SOFT_AUTO audio_seen=%s\r\n",
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_HARDWARE_SPI3
+    printf("[%s-check] i2c=%s mcu_master_rx=%s codec_clks=%s adc_power=%s mic_path=%s adc_sdp=%s asdout_pin=%s adcdat_sel=%s spi_ovr=%s capture=PB5_SPI3_I2S audio_seen=%s\r\n",
            tag,
            check_text(i2c_ok),
            check_text(mcu_master_rx),
@@ -63,9 +64,15 @@ static void dump_record_path_check(const char *tag, const board_audio_debug_info
            check_text(adc_serial),
            check_text(asdout_pin),
            check_text(adcdat_sel),
-           "IGNORED",
-           (unsigned long)dbg->rx_soft_data_pin,
+           check_text(dbg->rx_overruns == 0U),
            audio_seen ? "YES" : "NO");
+#else
+    printf("[%s-check] i2c=%s mcu_master_rx=%s codec_clks=%s adc_power=%s mic_path=%s adc_sdp=%s asdout_pin=%s adcdat_sel=%s spi_ovr=%s capture=PB%lu_SOFT_FIXED audio_seen=%s\r\n",
+           tag, check_text(i2c_ok), check_text(mcu_master_rx), check_text(codec_clks),
+           check_text(adc_power), check_text(mic_path), check_text(adc_serial),
+           check_text(asdout_pin), check_text(adcdat_sel), "IGNORED",
+           (unsigned long)dbg->rx_soft_data_pin, audio_seen ? "YES" : "NO");
+#endif
     printf("[%s-check-detail] r07_tri_adcdat=%lu r14_dmic=%lu r14_linsel=%lu r14_gain=0x%lX r16_scale=0x%lX r17_adcvol=0x%02lX r0A=0x%02lX r44_adc2dac=%lu r44_adcdat_sel=%lu rx_ovr=%lu soft_pin=PB%lu soft_frames=%lu bclk_to=%lu lrck_to=%lu pin_high=%lu pin_edges=%lu\r\n",
            tag,
            (unsigned long)((dbg->codec_reg07 >> 4) & 1U),
@@ -310,8 +317,13 @@ int main(void)
     printf("\r\n[audio-record] baremetal boot\r\n");
     printf("[audio-record] build %s %s\r\n", __DATE__, __TIME__);
     printf("[audio-record] USART1 PA9/PA10 115200 8N1\r\n");
-    printf("[audio-record] fw=record-weact-16k-play11k-gainfix-v41\r\n");
-    printf("[audio-record] pre-tone 1s; live monitor 8s; record 5s at 16k; 20pct speaker+monitor; PB4 v2; replay 11k; monitor off\r\n");
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_HARDWARE_SPI3
+    printf("[audio-record] fw=record-weact-16k-hw-i2s-pb5-v43\r\n");
+    printf("[audio-record] record_rx=SPI3 I2S MasterRx PB5; record/replay 16k; monitor off\r\n");
+#else
+    printf("[audio-record] fw=record-weact-16k-soft-i2s-pb4-v43\r\n");
+    printf("[audio-record] record_rx=software I2S PB4 v2; record/replay 16k; monitor off\r\n");
+#endif
 
     record_result = audio_record_demo_once();
     printf("[audio-record] record_result=%d\r\n", record_result);

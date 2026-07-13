@@ -8,14 +8,14 @@
 #define AUDIO_RECORD_DEMO_SECONDS 5U
 #define AUDIO_RECORD_DEMO_CHANNELS 1U
 #define AUDIO_RECORD_DEMO_RATE 16000U
-#define AUDIO_RECORD_PLAYBACK_RATE 11025U
+#define AUDIO_RECORD_PLAYBACK_RATE AUDIO_RECORD_DEMO_RATE
 #define AUDIO_RECORD_DEMO_SAMPLES (AUDIO_RECORD_DEMO_RATE * AUDIO_RECORD_DEMO_SECONDS)
 #define AUDIO_RECORD_CHUNK_SAMPLES 128U
 #define AUDIO_RECORD_CAPTURE_STEP_SAMPLES 1U
 #define AUDIO_RECORD_ADPCM_BYTES ((AUDIO_RECORD_DEMO_SAMPLES + 1U) / 2U)
 #define AUDIO_RECORD_TEST_TONE_MS 1000U
 #define AUDIO_RECORD_MONITOR_MS 8000U
-#define AUDIO_RECORD_ENABLE_ADC_DAC_MONITOR 1U
+#define AUDIO_RECORD_ENABLE_ADC_DAC_MONITOR 0U
 #define AUDIO_RECORD_PLAYBACK_TARGET_PEAK 12000U
 #define AUDIO_RECORD_PLAYBACK_GAIN_Q8_ONE 256U
 #define AUDIO_RECORD_PLAYBACK_MAX_GAIN_Q8 (2U * AUDIO_RECORD_PLAYBACK_GAIN_Q8_ONE)
@@ -427,6 +427,7 @@ int audio_record_demo_once(void)
     g_record_debug.monitor_done_board = *board_audio_get_debug_info();
 #endif
 
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_SOFTWARE_PB4
     board_audio_scan_i2s_pins(4096U);
     printf("[record-stage] soft-i2s probe start\r\n");
     (void)board_audio_probe_soft_i2s_variants(g_record_debug.soft_variants, BOARD_AUDIO_SOFT_I2S_VARIANT_COUNT);
@@ -443,6 +444,9 @@ int audio_record_demo_once(void)
                (unsigned long)v->left_abs_peak,
                (unsigned long)v->right_abs_peak);
     }
+#else
+    printf("[record-stage] capture backend=SPI3_I2S_MASTER_RX pin=PB5\r\n");
+#endif
 
     printf("[record-stage] capture start samples=%lu speak-now\r\n", (unsigned long)AUDIO_RECORD_DEMO_SAMPLES);
     if (audio_record_capture_adpcm() != 0)
