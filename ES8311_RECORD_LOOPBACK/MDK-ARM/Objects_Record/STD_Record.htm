@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects_Record\STD_Record.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects_Record\STD_Record.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Jul 13 11:01:27 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Jul 14 15:25:59 2026
 <BR><P>
 <H3>Maximum Stack Usage =        320 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -550,9 +550,9 @@ Global Symbols
 
 <P><STRONG><a name="[111]"></a>_memcpy_lastbytes_aligned</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memcpy_w.o(.text), UNUSED)
 
-<P><STRONG><a name="[b9]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_recover_if_underrun
+<P><STRONG><a name="[ba]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_recover_if_underrun
 </UL>
 
 <P><STRONG><a name="[6e]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
@@ -675,23 +675,23 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_hd.o(RESET)
 </UL>
-<P><STRONG><a name="[bc]"></a>DMA_Cmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
+<P><STRONG><a name="[bd]"></a>DMA_Cmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
 </UL>
 
-<P><STRONG><a name="[bd]"></a>DMA_DeInit</STRONG> (Thumb, 218 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_DeInit))
-<BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
+<P><STRONG><a name="[be]"></a>DMA_DeInit</STRONG> (Thumb, 218 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_DeInit))
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
 </UL>
 
-<P><STRONG><a name="[b7]"></a>DMA_GetCurrDataCounter</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_GetCurrDataCounter))
-<BR><BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_read_index
+<P><STRONG><a name="[b8]"></a>DMA_GetCurrDataCounter</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_GetCurrDataCounter))
+<BR><BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_read_index
 </UL>
 
-<P><STRONG><a name="[be]"></a>DMA_Init</STRONG> (Thumb, 58 bytes, Stack size 12 bytes, stm32f10x_dma.o(i.DMA_Init))
+<P><STRONG><a name="[bf]"></a>DMA_Init</STRONG> (Thumb, 58 bytes, Stack size 12 bytes, stm32f10x_dma.o(i.DMA_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = DMA_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
+<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
 </UL>
 
 <P><STRONG><a name="[b]"></a>DebugMon_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f10x_it.o(i.DebugMon_Handler))
@@ -714,18 +714,19 @@ Global Symbols
 <P><STRONG><a name="[80]"></a>GPIO_Init</STRONG> (Thumb, 162 bytes, Stack size 20 bytes, stm32f10x_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_Init
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
+<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_playback
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_Init
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_drive_low
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init_record_inputs
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init_record_inputs
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
 </UL>
 
 <P><STRONG><a name="[7f]"></a>GPIO_PinRemapConfig</STRONG> (Thumb, 82 bytes, Stack size 20 bytes, stm32f10x_gpio.o(i.GPIO_PinRemapConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_PinRemapConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_Init
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
 </UL>
 
 <P><STRONG><a name="[77]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_ReadInputDataBit))
@@ -742,16 +743,16 @@ Global Symbols
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_debug_regs
 </UL>
 
-<P><STRONG><a name="[c7]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_ResetBits))
+<P><STRONG><a name="[c8]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_ResetBits))
 <BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_playback
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_drive_low
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
 </UL>
 
 <P><STRONG><a name="[cf]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_SetBits))
 <BR><BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_stop_playback
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_record_rate
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
 </UL>
 
 <P><STRONG><a name="[79]"></a>GPIO_WriteBit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_WriteBit))
@@ -765,10 +766,11 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_hd.o(RESET)
 </UL>
-<P><STRONG><a name="[cb]"></a>I2S_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.I2S_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_stop_quiet
+<P><STRONG><a name="[ac]"></a>I2S_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.I2S_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_mono_sample
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_stop_quiet
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_tx_rate
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
 </UL>
 
 <P><STRONG><a name="[7b]"></a>I2S_Init</STRONG> (Thumb, 152 bytes, Stack size 40 bytes, stm32f10x_spi.o(i.I2S_Init))
@@ -777,7 +779,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_tx_rate
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
 </UL>
 
 <P><STRONG><a name="[7d]"></a>MX_USART1_Init</STRONG> (Thumb, 190 bytes, Stack size 48 bytes, usart.o(i.MX_USART1_Init))
@@ -817,13 +819,13 @@ Global Symbols
 <P><STRONG><a name="[c]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f10x_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_hd.o(RESET)
 </UL>
-<P><STRONG><a name="[bb]"></a>RCC_AHBPeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
+<P><STRONG><a name="[bc]"></a>RCC_AHBPeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
 </UL>
 
-<P><STRONG><a name="[c5]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<P><STRONG><a name="[c6]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
 </UL>
 
 <P><STRONG><a name="[87]"></a>RCC_APB1PeriphResetCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB1PeriphResetCmd))
@@ -832,7 +834,7 @@ Global Symbols
 
 <P><STRONG><a name="[7e]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd))
 <BR><BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_Init
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
 </UL>
 
 <P><STRONG><a name="[86]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB2PeriphResetCmd))
@@ -846,10 +848,10 @@ Global Symbols
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Init
 </UL>
 
-<P><STRONG><a name="[bf]"></a>SPI_I2S_DMACmd</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_DMACmd))
+<P><STRONG><a name="[c0]"></a>SPI_I2S_DMACmd</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_DMACmd))
 <BR><BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_stop_quiet
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
 </UL>
 
 <P><STRONG><a name="[85]"></a>SPI_I2S_DeInit</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, stm32f10x_spi.o(i.SPI_I2S_DeInit))
@@ -860,20 +862,20 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_stop_quiet
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_tx_rate
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
 </UL>
 
 <P><STRONG><a name="[d1]"></a>SPI_I2S_GetFlagStatus</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus))
-<BR><BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_write_word
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_read_word
+<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_write_word
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_read_word
 </UL>
 
 <P><STRONG><a name="[d2]"></a>SPI_I2S_ReceiveData</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_ReceiveData))
-<BR><BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_read_word
+<BR><BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_read_word
 </UL>
 
 <P><STRONG><a name="[d3]"></a>SPI_I2S_SendData</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_SendData))
-<BR><BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_write_word
+<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_write_word
 </UL>
 
 <P><STRONG><a name="[a]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f10x_it.o(i.SVC_Handler))
@@ -944,7 +946,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
 </UL>
 
-<P><STRONG><a name="[92]"></a>audio_record_demo_once</STRONG> (Thumb, 704 bytes, Stack size 48 bytes, record_audio_record.o(i.audio_record_demo_once))
+<P><STRONG><a name="[92]"></a>audio_record_demo_once</STRONG> (Thumb, 742 bytes, Stack size 48 bytes, record_audio_record.o(i.audio_record_demo_once))
 <BR><BR>[Stack]<UL><LI>Max Depth = 264 + Unknown Stack Size
 <LI>Call Chain = audio_record_demo_once &rArr; audio_record_stage_log &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -978,12 +980,13 @@ Global Symbols
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dump_record_debug
 </UL>
 
-<P><STRONG><a name="[90]"></a>board_audio_capture_mono_sample</STRONG> (Thumb, 134 bytes, Stack size 32 bytes, record_board_audio.o(i.board_audio_capture_mono_sample))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = board_audio_capture_mono_sample &rArr; board_audio_read_word
+<P><STRONG><a name="[90]"></a>board_audio_capture_mono_sample</STRONG> (Thumb, 178 bytes, Stack size 40 bytes, record_board_audio.o(i.board_audio_capture_mono_sample))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = board_audio_capture_mono_sample &rArr; board_audio_read_word
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_read_word
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_update_raw_debug
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_abs16
+<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Cmd
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_read_word
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_update_raw_debug
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_abs16
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_record_capture_adpcm
 </UL>
@@ -991,7 +994,7 @@ Global Symbols
 <P><STRONG><a name="[9e]"></a>board_audio_drain</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, record_board_audio.o(i.board_audio_drain))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = board_audio_drain &rArr; board_audio_dma_drain &rArr; board_audio_update_dma_debug &rArr; board_audio_dma_used_halfwords &rArr; board_audio_dma_update_read_total &rArr; board_audio_dma_read_index
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_drain
+<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_drain
 </UL>
 <BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_record_demo_once
 </UL>
@@ -1021,16 +1024,17 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_record_demo_once
 </UL>
 
-<P><STRONG><a name="[99]"></a>board_audio_init_playback</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_init_playback))
+<P><STRONG><a name="[99]"></a>board_audio_init_playback</STRONG> (Thumb, 108 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_init_playback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = board_audio_init_playback &rArr; board_audio_codec_init_playback &rArr; es8311_probe &rArr; es8311_probe_addr &rArr; i2c_write_byte &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_reset_debug
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_stop_quiet
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_tx_rate
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_mcu_debug
 </UL>
 <BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_record_demo_once
@@ -1043,10 +1047,10 @@ Global Symbols
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_reset_debug
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_stop_quiet
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init_record_inputs
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init_record_inputs
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_mcu_debug
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_debug_regs
 </UL>
@@ -1059,7 +1063,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadOutputDataBit
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_update_dma_debug
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_apply_volume
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_record_play_adpcm
@@ -1068,7 +1072,7 @@ Global Symbols
 <P><STRONG><a name="[9d]"></a>board_audio_play_test_tone</STRONG> (Thumb, 96 bytes, Stack size 24 bytes, record_board_audio.o(i.board_audio_play_test_tone))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = board_audio_play_test_tone &rArr; board_audio_dma_write_frame &rArr; board_audio_update_dma_debug &rArr; board_audio_dma_used_halfwords &rArr; board_audio_dma_update_read_total &rArr; board_audio_dma_read_index
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
+<BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_apply_volume
 </UL>
 <BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_record_demo_once
@@ -1113,10 +1117,10 @@ Global Symbols
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_playback
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI1_IRQHandler
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
 </UL>
 
 <P><STRONG><a name="[4c]"></a>fputc</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, usart.o(i.fputc))
@@ -1163,7 +1167,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[d7]"></a>dump_playback_path_check</STRONG> (Thumb, 174 bytes, Stack size 72 bytes, record_main.o(i.dump_playback_path_check))
+<P><STRONG><a name="[d7]"></a>dump_playback_path_check</STRONG> (Thumb, 172 bytes, Stack size 72 bytes, record_main.o(i.dump_playback_path_check))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216 + Unknown Stack Size
 <LI>Call Chain = dump_playback_path_check &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1174,8 +1178,8 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dump_board_audio_debug_ptr
 </UL>
 
-<P><STRONG><a name="[db]"></a>dump_record_debug</STRONG> (Thumb, 394 bytes, Stack size 72 bytes, record_main.o(i.dump_record_debug))
-<BR><BR>[Stack]<UL><LI>Max Depth = 216 + Unknown Stack Size
+<P><STRONG><a name="[db]"></a>dump_record_debug</STRONG> (Thumb, 310 bytes, Stack size 40 bytes, record_main.o(i.dump_record_debug))
+<BR><BR>[Stack]<UL><LI>Max Depth = 184 + Unknown Stack Size
 <LI>Call Chain = dump_record_debug &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_record_get_debug_info
@@ -1223,7 +1227,7 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[8e]"></a>audio_record_capture_adpcm</STRONG> (Thumb, 152 bytes, Stack size 40 bytes, record_audio_record.o(i.audio_record_capture_adpcm))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = audio_record_capture_adpcm &rArr; board_audio_capture_mono_sample &rArr; board_audio_read_word
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = audio_record_capture_adpcm &rArr; board_audio_capture_mono_sample &rArr; board_audio_read_word
 </UL>
 <BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_mono_sample
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_record_update_capture_stats
@@ -1275,13 +1279,13 @@ Local Symbols
 <P><STRONG><a name="[e5]"></a>audio_delay_short</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, record_board_audio.o(i.audio_delay_short))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = audio_delay_short
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
+<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_drive_low
 </UL>
 
-<P><STRONG><a name="[ae]"></a>board_audio_abs16</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, record_board_audio.o(i.board_audio_abs16))
+<P><STRONG><a name="[af]"></a>board_audio_abs16</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, record_board_audio.o(i.board_audio_abs16))
 <BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_mono_sample
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_update_raw_debug
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_update_raw_debug
 </UL>
 
 <P><STRONG><a name="[d0]"></a>board_audio_apply_volume</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, record_board_audio.o(i.board_audio_apply_volume))
@@ -1298,8 +1302,8 @@ Local Symbols
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_update_dma_debug
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_record_rate
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
 </UL>
 
 <P><STRONG><a name="[ab]"></a>board_audio_capture_mcu_debug</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_capture_mcu_debug))
@@ -1314,139 +1318,139 @@ Local Symbols
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_playback
 </UL>
 
-<P><STRONG><a name="[ad]"></a>board_audio_capture_update_raw_debug</STRONG> (Thumb, 134 bytes, Stack size 24 bytes, record_board_audio.o(i.board_audio_capture_update_raw_debug))
+<P><STRONG><a name="[ae]"></a>board_audio_capture_update_raw_debug</STRONG> (Thumb, 134 bytes, Stack size 24 bytes, record_board_audio.o(i.board_audio_capture_update_raw_debug))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = board_audio_capture_update_raw_debug
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_abs16
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_abs16
 </UL>
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_mono_sample
 </UL>
 
-<P><STRONG><a name="[af]"></a>board_audio_codec_init_playback</STRONG> (Thumb, 412 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_codec_init_playback))
+<P><STRONG><a name="[b0]"></a>board_audio_codec_init_playback</STRONG> (Thumb, 412 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_codec_init_playback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = board_audio_codec_init_playback &rArr; es8311_probe &rArr; es8311_probe_addr &rArr; i2c_write_byte &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_debug_regs
 </UL>
 <BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_playback
 </UL>
 
-<P><STRONG><a name="[b2]"></a>board_audio_codec_init_record</STRONG> (Thumb, 452 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_codec_init_record))
+<P><STRONG><a name="[b3]"></a>board_audio_codec_init_record</STRONG> (Thumb, 452 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_codec_init_record))
 <BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = board_audio_codec_init_record &rArr; es8311_probe &rArr; es8311_probe_addr &rArr; i2c_write_byte &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_record_key_ready
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_record_key_ready
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_debug_regs
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_record_rate
 </UL>
 
-<P><STRONG><a name="[b4]"></a>board_audio_dma_drain</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, record_board_audio.o(i.board_audio_dma_drain))
+<P><STRONG><a name="[b5]"></a>board_audio_dma_drain</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, record_board_audio.o(i.board_audio_dma_drain))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = board_audio_dma_drain &rArr; board_audio_update_dma_debug &rArr; board_audio_dma_used_halfwords &rArr; board_audio_dma_update_read_total &rArr; board_audio_dma_read_index
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_update_dma_debug
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_drain
 </UL>
 
-<P><STRONG><a name="[b6]"></a>board_audio_dma_read_index</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_dma_read_index))
+<P><STRONG><a name="[b7]"></a>board_audio_dma_read_index</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_dma_read_index))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = board_audio_dma_read_index
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCurrDataCounter
+<BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetCurrDataCounter
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
+<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
 </UL>
 
-<P><STRONG><a name="[b8]"></a>board_audio_dma_recover_if_underrun</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_dma_recover_if_underrun))
+<P><STRONG><a name="[b9]"></a>board_audio_dma_recover_if_underrun</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_dma_recover_if_underrun))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = board_audio_dma_recover_if_underrun &rArr; board_audio_dma_update_read_total &rArr; board_audio_dma_read_index
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
+<BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
 </UL>
 
-<P><STRONG><a name="[ba]"></a>board_audio_dma_start</STRONG> (Thumb, 140 bytes, Stack size 64 bytes, record_board_audio.o(i.board_audio_dma_start))
+<P><STRONG><a name="[bb]"></a>board_audio_dma_start</STRONG> (Thumb, 140 bytes, Stack size 64 bytes, record_board_audio.o(i.board_audio_dma_start))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = board_audio_dma_start &rArr; DMA_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DMACmd
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
-<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_read_index
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DMACmd
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_read_index
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_tx_rate
 </UL>
 
-<P><STRONG><a name="[c0]"></a>board_audio_dma_stop</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_dma_stop))
+<P><STRONG><a name="[c1]"></a>board_audio_dma_stop</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_dma_stop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = board_audio_dma_stop
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DMACmd
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
+<BR>[Calls]<UL><LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DMACmd
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_stop_quiet
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_tx_rate
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
 </UL>
 
-<P><STRONG><a name="[b5]"></a>board_audio_dma_update_read_total</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_dma_update_read_total))
+<P><STRONG><a name="[b6]"></a>board_audio_dma_update_read_total</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_dma_update_read_total))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = board_audio_dma_update_read_total &rArr; board_audio_dma_read_index
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_read_index
+<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_read_index
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_used_halfwords
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_recover_if_underrun
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_drain
+<BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_used_halfwords
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_recover_if_underrun
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_drain
 </UL>
 
-<P><STRONG><a name="[c1]"></a>board_audio_dma_used_halfwords</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_dma_used_halfwords))
+<P><STRONG><a name="[c2]"></a>board_audio_dma_used_halfwords</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_dma_used_halfwords))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = board_audio_dma_used_halfwords &rArr; board_audio_dma_update_read_total &rArr; board_audio_dma_read_index
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
+<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
 </UL>
 <BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_update_dma_debug
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
 </UL>
 
-<P><STRONG><a name="[c2]"></a>board_audio_dma_write_frame</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, record_board_audio.o(i.board_audio_dma_write_frame))
+<P><STRONG><a name="[c3]"></a>board_audio_dma_write_frame</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, record_board_audio.o(i.board_audio_dma_write_frame))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = board_audio_dma_write_frame &rArr; board_audio_update_dma_debug &rArr; board_audio_dma_used_halfwords &rArr; board_audio_dma_update_read_total &rArr; board_audio_dma_read_index
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_write_word
+<BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_write_word
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_update_dma_debug
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_used_halfwords
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_recover_if_underrun
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_used_halfwords
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_update_read_total
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_recover_if_underrun
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_play_test_tone
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_play_pcm
 </UL>
 
-<P><STRONG><a name="[c4]"></a>board_audio_gpio_init</STRONG> (Thumb, 192 bytes, Stack size 32 bytes, record_board_audio.o(i.board_audio_gpio_init))
+<P><STRONG><a name="[c5]"></a>board_audio_gpio_init</STRONG> (Thumb, 210 bytes, Stack size 32 bytes, record_board_audio.o(i.board_audio_gpio_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = board_audio_gpio_init &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_PinRemapConfig
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_record_rate
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_playback
 </UL>
 
-<P><STRONG><a name="[c8]"></a>board_audio_gpio_init_record_inputs</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_gpio_init_record_inputs))
+<P><STRONG><a name="[c9]"></a>board_audio_gpio_init_record_inputs</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_gpio_init_record_inputs))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = board_audio_gpio_init_record_inputs &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
@@ -1454,19 +1458,19 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_record_rate
 </UL>
 
-<P><STRONG><a name="[ca]"></a>board_audio_i2s_freq</STRONG> (Thumb, 94 bytes, Stack size 0 bytes, record_board_audio.o(i.board_audio_i2s_freq))
+<P><STRONG><a name="[cb]"></a>board_audio_i2s_freq</STRONG> (Thumb, 94 bytes, Stack size 0 bytes, record_board_audio.o(i.board_audio_i2s_freq))
 <BR><BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_tx_rate
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_init_rx_rate
 </UL>
 
-<P><STRONG><a name="[c9]"></a>board_audio_i2s_init_rx_rate</STRONG> (Thumb, 112 bytes, Stack size 32 bytes, record_board_audio.o(i.board_audio_i2s_init_rx_rate))
+<P><STRONG><a name="[ca]"></a>board_audio_i2s_init_rx_rate</STRONG> (Thumb, 112 bytes, Stack size 32 bytes, record_board_audio.o(i.board_audio_i2s_init_rx_rate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = board_audio_i2s_init_rx_rate &rArr; I2S_Init &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DeInit
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Init
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Cmd
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_freq
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Cmd
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_freq
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_record_rate
 </UL>
@@ -1476,10 +1480,10 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DeInit
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Init
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Cmd
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_freq
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Cmd
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_i2s_freq
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_start
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_set_sample_rate
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_playback
@@ -1489,16 +1493,16 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = board_audio_i2s_stop_quiet &rArr; SPI_I2S_DeInit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DeInit
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DMACmd
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Cmd
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DMACmd
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2S_Cmd
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_stop
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_stop_playback
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_record_rate
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_init_playback
 </UL>
 
-<P><STRONG><a name="[ac]"></a>board_audio_read_word</STRONG> (Thumb, 110 bytes, Stack size 24 bytes, record_board_audio.o(i.board_audio_read_word))
+<P><STRONG><a name="[ad]"></a>board_audio_read_word</STRONG> (Thumb, 110 bytes, Stack size 24 bytes, record_board_audio.o(i.board_audio_read_word))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = board_audio_read_word
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_ReceiveData
@@ -1507,8 +1511,8 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_mono_sample
 </UL>
 
-<P><STRONG><a name="[b3]"></a>board_audio_record_key_ready</STRONG> (Thumb, 94 bytes, Stack size 0 bytes, record_board_audio.o(i.board_audio_record_key_ready))
-<BR><BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
+<P><STRONG><a name="[b4]"></a>board_audio_record_key_ready</STRONG> (Thumb, 94 bytes, Stack size 0 bytes, record_board_audio.o(i.board_audio_record_key_ready))
+<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
 </UL>
 
 <P><STRONG><a name="[ce]"></a>board_audio_reset_debug</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, record_board_audio.o(i.board_audio_reset_debug))
@@ -1523,33 +1527,33 @@ Local Symbols
 <P><STRONG><a name="[aa]"></a>board_audio_update_dma_debug</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_update_dma_debug))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = board_audio_update_dma_debug &rArr; board_audio_dma_used_halfwords &rArr; board_audio_dma_update_read_total &rArr; board_audio_dma_read_index
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_used_halfwords
+<BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_used_halfwords
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_play_pcm
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_drain
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_drain
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_mcu_debug
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_capture_debug_regs
 </UL>
 
-<P><STRONG><a name="[c3]"></a>board_audio_write_word</STRONG> (Thumb, 30 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_write_word))
+<P><STRONG><a name="[c4]"></a>board_audio_write_word</STRONG> (Thumb, 30 bytes, Stack size 16 bytes, record_board_audio.o(i.board_audio_write_word))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = board_audio_write_word
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_SendData
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
+<BR>[Called By]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_dma_write_frame
 </UL>
 
-<P><STRONG><a name="[b0]"></a>es8311_probe</STRONG> (Thumb, 100 bytes, Stack size 24 bytes, record_board_audio.o(i.es8311_probe))
+<P><STRONG><a name="[b1]"></a>es8311_probe</STRONG> (Thumb, 100 bytes, Stack size 24 bytes, record_board_audio.o(i.es8311_probe))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = es8311_probe &rArr; es8311_probe_addr &rArr; i2c_write_byte &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_capture_bus_state
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe_addr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
+<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
 </UL>
 
 <P><STRONG><a name="[dd]"></a>es8311_probe_addr</STRONG> (Thumb, 80 bytes, Stack size 24 bytes, record_board_audio.o(i.es8311_probe_addr))
@@ -1560,7 +1564,7 @@ Local Symbols
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_start
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_capture_bus_state
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
+<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
 </UL>
 
 <P><STRONG><a name="[a8]"></a>es8311_read_reg</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, record_board_audio.o(i.es8311_read_reg))
@@ -1578,14 +1582,14 @@ Local Symbols
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_stop
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_start
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_sda_read
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_drive_low
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_capture_bus_state
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_read_reg
 </UL>
 
-<P><STRONG><a name="[b1]"></a>es8311_write_reg</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, record_board_audio.o(i.es8311_write_reg))
+<P><STRONG><a name="[b2]"></a>es8311_write_reg</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, record_board_audio.o(i.es8311_write_reg))
 <BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = es8311_write_reg &rArr; i2c_write_byte &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_write_byte
@@ -1593,8 +1597,8 @@ Local Symbols
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_start
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_capture_bus_state
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
+<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_record
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_codec_init_playback
 </UL>
 
 <P><STRONG><a name="[de]"></a>i2c_capture_bus_state</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, record_board_audio.o(i.i2c_capture_bus_state))
@@ -1603,17 +1607,17 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_sda_read
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
+<BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_read_reg_raw
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe_addr
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe
 </UL>
 
 <P><STRONG><a name="[e4]"></a>i2c_line_drive_low</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, record_board_audio.o(i.i2c_line_drive_low))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = i2c_line_drive_low &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;audio_delay_short
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_write_byte
@@ -1622,7 +1626,7 @@ Local Symbols
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_read_reg_raw
 </UL>
 
-<P><STRONG><a name="[c6]"></a>i2c_line_input_pullup</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, record_board_audio.o(i.i2c_line_input_pullup))
+<P><STRONG><a name="[c7]"></a>i2c_line_input_pullup</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, record_board_audio.o(i.i2c_line_input_pullup))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
@@ -1633,7 +1637,7 @@ Local Symbols
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_stop
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_start
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_read_reg_raw
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_audio_gpio_init
 </UL>
 
 <P><STRONG><a name="[e3]"></a>i2c_sda_read</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, record_board_audio.o(i.i2c_sda_read))
@@ -1647,10 +1651,10 @@ Local Symbols
 <P><STRONG><a name="[e0]"></a>i2c_start</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, record_board_audio.o(i.i2c_start))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = i2c_start &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
+<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_drive_low
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
+<BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_read_reg_raw
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe_addr
 </UL>
@@ -1658,10 +1662,10 @@ Local Symbols
 <P><STRONG><a name="[df]"></a>i2c_stop</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, record_board_audio.o(i.i2c_stop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = i2c_stop &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
+<BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_drive_low
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
+<BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_read_reg_raw
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe_addr
 </UL>
@@ -1670,10 +1674,10 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = i2c_write_byte &rArr; i2c_line_input_pullup &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_sda_read
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_input_pullup
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c_line_drive_low
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
+<BR>[Called By]<UL><LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_write_reg
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_read_reg_raw
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;es8311_probe_addr
 </UL>

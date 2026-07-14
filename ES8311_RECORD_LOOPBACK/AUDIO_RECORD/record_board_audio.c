@@ -27,7 +27,7 @@
 #define ES8311_I2C_READ_OFFSET 0x01
 #define AUDIO_SAMPLE_RATE 48000U
 #define AUDIO_TEST_TABLE_SIZE 48U
-#define AUDIO_PLAYBACK_VOLUME_PERCENT 20U
+#define AUDIO_PLAYBACK_VOLUME_PERCENT 30U
 #define AUDIO_MONITOR_DAC_VOLUME_REG 0xA3U
 #define AUDIO_MODE_NONE 0
 #define AUDIO_MODE_PLAYBACK 1
@@ -41,8 +41,8 @@
 #define AUDIO_I2S_SOFT_BCLK_TIMEOUT 20000U
 #define AUDIO_I2S_SOFT_LRCK_TIMEOUT 2000000U
 #define AUDIO_I2S_SOFT_SAMPLE_DELAY_NOPS 8U
-#define AUDIO_RECORD_ADC_SCALE_REG 0x20U
-#define AUDIO_RECORD_ADC_VOLUME_REG 0xAFU
+#define AUDIO_RECORD_ADC_SCALE_REG 0x24U
+#define AUDIO_RECORD_ADC_VOLUME_REG 0xBFU
 #define AUDIO_RECORD_MIC_PATH_REG 0x1AU
 #define AUDIO_PLAYBACK_MIC_PATH_REG 0x1AU
 #define AUDIO_RECORD_MONO_USE_RIGHT 0U
@@ -517,13 +517,27 @@ static void board_audio_gpio_init(void)
     gpio.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(AUDIO_I2S_WS_PORT, &gpio);
 
-    gpio.GPIO_Pin = AUDIO_I2S_CK_PIN | AUDIO_I2S_SD_PIN;
+    gpio.GPIO_Pin = AUDIO_I2S_CK_PIN;
     gpio.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_Init(AUDIO_I2S_CK_PORT, &gpio);
+
+    gpio.GPIO_Pin = AUDIO_I2S_SD_PIN;
+    gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init(AUDIO_I2S_SD_PORT, &gpio);
 
     gpio.GPIO_Pin = AUDIO_I2S_RX_PIN;
     gpio.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_Init(AUDIO_I2S_RX_PORT, &gpio);
+}
+
+static void board_audio_gpio_init_playback_output(void)
+{
+    GPIO_InitTypeDef gpio;
+
+    gpio.GPIO_Speed = GPIO_Speed_50MHz;
+    gpio.GPIO_Pin = AUDIO_I2S_SD_PIN;
+    gpio.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_Init(AUDIO_I2S_SD_PORT, &gpio);
 }
 
 static void board_audio_gpio_init_record_inputs(void)
@@ -948,6 +962,17 @@ static void board_audio_clear_rx_overrun(void)
     }
 }
 
+static void board_audio_restart_hardware_rx(void)
+{
+    volatile uint16_t discard;
+
+    I2S_Cmd(SPI3, DISABLE);
+    discard = SPI3->DR;
+    discard = SPI3->SR;
+    (void)discard;
+    I2S_Cmd(SPI3, ENABLE);
+}
+
 static int board_audio_read_word(int16_t *value)
 {
     uint32_t timeout = AUDIO_I2S_READ_TIMEOUT;
@@ -991,6 +1016,7 @@ int board_audio_init_playback(void)
         return -1;
     }
     audio_delay_ms(10);
+    board_audio_gpio_init_playback_output();
     board_audio_i2s_init_tx();
     audio_delay_ms(20);
     AUDIO_AMP_ENABLE();
@@ -1598,6 +1624,10 @@ int board_audio_capture_mono_sample(int16_t *sample)
 
     g_audio_debug.last_channels = 1U;
     frame_index = g_audio_debug.rx_frames;
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_HARDWARE_SPI3
+    if (frame_index == 0U)
+        board_audio_restart_hardware_rx();
+#endif
 #if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_SOFTWARE_PB4
     if (board_audio_capture_soft_i2s_frame(&left, &right) != 0)
         return -3;

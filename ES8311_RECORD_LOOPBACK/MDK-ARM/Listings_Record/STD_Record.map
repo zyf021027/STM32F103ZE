@@ -67,8 +67,6 @@ Section Cross References
     record_main.o(i.dump_record_debug) refers to _printf_pad.o(.text) for _printf_pre_padding
     record_main.o(i.dump_record_debug) refers to _printf_x.o(.ARM.Collect$$_printf_percent$$0000000C) for _printf_x
     record_main.o(i.dump_record_debug) refers to _printf_hex_int.o(.text) for _printf_longlong_hex
-    record_main.o(i.dump_record_debug) refers to _printf_s.o(.ARM.Collect$$_printf_percent$$00000014) for _printf_s
-    record_main.o(i.dump_record_debug) refers to _printf_str.o(.text) for _printf_str
     record_main.o(i.dump_record_debug) refers to record_audio_record.o(i.audio_record_get_debug_info) for audio_record_get_debug_info
     record_main.o(i.dump_record_debug) refers to noretval__2printf.o(.text) for __2printf
     record_main.o(i.dump_record_debug) refers to record_main.o(.conststring) for .conststring
@@ -211,6 +209,7 @@ Section Cross References
     record_board_audio.o(i.board_audio_capture_mcu_debug) refers to stm32f10x_gpio.o(i.GPIO_ReadOutputDataBit) for GPIO_ReadOutputDataBit
     record_board_audio.o(i.board_audio_capture_mcu_debug) refers to record_board_audio.o(i.board_audio_update_dma_debug) for board_audio_update_dma_debug
     record_board_audio.o(i.board_audio_capture_mcu_debug) refers to record_board_audio.o(.bss) for .bss
+    record_board_audio.o(i.board_audio_capture_mono_sample) refers to stm32f10x_spi.o(i.I2S_Cmd) for I2S_Cmd
     record_board_audio.o(i.board_audio_capture_mono_sample) refers to record_board_audio.o(i.board_audio_read_word) for board_audio_read_word
     record_board_audio.o(i.board_audio_capture_mono_sample) refers to record_board_audio.o(i.board_audio_capture_update_raw_debug) for board_audio_capture_update_raw_debug
     record_board_audio.o(i.board_audio_capture_mono_sample) refers to record_board_audio.o(i.board_audio_abs16) for board_audio_abs16
@@ -304,6 +303,7 @@ Section Cross References
     record_board_audio.o(i.board_audio_init_playback) refers to delay.o(i.delay_ms) for delay_ms
     record_board_audio.o(i.board_audio_init_playback) refers to record_board_audio.o(i.board_audio_codec_init_playback) for board_audio_codec_init_playback
     record_board_audio.o(i.board_audio_init_playback) refers to record_board_audio.o(i.board_audio_capture_mcu_debug) for board_audio_capture_mcu_debug
+    record_board_audio.o(i.board_audio_init_playback) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
     record_board_audio.o(i.board_audio_init_playback) refers to record_board_audio.o(i.board_audio_i2s_init_tx_rate) for board_audio_i2s_init_tx_rate
     record_board_audio.o(i.board_audio_init_playback) refers to stm32f10x_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
     record_board_audio.o(i.board_audio_init_playback) refers to record_board_audio.o(.bss) for .bss
@@ -1355,134 +1355,134 @@ Image Symbol Table
     i.audio_record_clamp_int16               0x0800136c   Section        0  record_audio_record.o(i.audio_record_clamp_int16)
     audio_record_clamp_int16                 0x0800136d   Thumb Code    22  record_audio_record.o(i.audio_record_clamp_int16)
     i.audio_record_demo_once                 0x08001388   Section        0  record_audio_record.o(i.audio_record_demo_once)
-    i.audio_record_get_debug_info            0x080018ec   Section        0  record_audio_record.o(i.audio_record_get_debug_info)
-    i.audio_record_play_adpcm                0x080018f4   Section        0  record_audio_record.o(i.audio_record_play_adpcm)
-    audio_record_play_adpcm                  0x080018f5   Thumb Code   222  record_audio_record.o(i.audio_record_play_adpcm)
-    i.audio_record_reset_stats               0x080019ec   Section        0  record_audio_record.o(i.audio_record_reset_stats)
-    audio_record_reset_stats                 0x080019ed   Thumb Code    60  record_audio_record.o(i.audio_record_reset_stats)
-    i.audio_record_stage_log                 0x08001a34   Section        0  record_audio_record.o(i.audio_record_stage_log)
-    audio_record_stage_log                   0x08001a35   Thumb Code   100  record_audio_record.o(i.audio_record_stage_log)
-    i.audio_record_update_capture_stats      0x08001a9c   Section        0  record_audio_record.o(i.audio_record_update_capture_stats)
-    audio_record_update_capture_stats        0x08001a9d   Thumb Code   112  record_audio_record.o(i.audio_record_update_capture_stats)
-    i.board_audio_abs16                      0x08001b1c   Section        0  record_board_audio.o(i.board_audio_abs16)
-    board_audio_abs16                        0x08001b1d   Thumb Code    20  record_board_audio.o(i.board_audio_abs16)
-    i.board_audio_apply_volume               0x08001b30   Section        0  record_board_audio.o(i.board_audio_apply_volume)
-    board_audio_apply_volume                 0x08001b31   Thumb Code    34  record_board_audio.o(i.board_audio_apply_volume)
-    i.board_audio_capture_debug_regs         0x08001b58   Section        0  record_board_audio.o(i.board_audio_capture_debug_regs)
-    board_audio_capture_debug_regs           0x08001b59   Thumb Code   742  record_board_audio.o(i.board_audio_capture_debug_regs)
-    i.board_audio_capture_mcu_debug          0x08001e58   Section        0  record_board_audio.o(i.board_audio_capture_mcu_debug)
-    board_audio_capture_mcu_debug            0x08001e59   Thumb Code    96  record_board_audio.o(i.board_audio_capture_mcu_debug)
-    i.board_audio_capture_mono_sample        0x08001ed0   Section        0  record_board_audio.o(i.board_audio_capture_mono_sample)
-    i.board_audio_capture_update_raw_debug   0x08001f5c   Section        0  record_board_audio.o(i.board_audio_capture_update_raw_debug)
-    board_audio_capture_update_raw_debug     0x08001f5d   Thumb Code   134  record_board_audio.o(i.board_audio_capture_update_raw_debug)
-    i.board_audio_codec_init_playback        0x08001fe8   Section        0  record_board_audio.o(i.board_audio_codec_init_playback)
-    board_audio_codec_init_playback          0x08001fe9   Thumb Code   412  record_board_audio.o(i.board_audio_codec_init_playback)
-    i.board_audio_codec_init_record          0x08002188   Section        0  record_board_audio.o(i.board_audio_codec_init_record)
-    board_audio_codec_init_record            0x08002189   Thumb Code   452  record_board_audio.o(i.board_audio_codec_init_record)
-    i.board_audio_dma_drain                  0x08002350   Section        0  record_board_audio.o(i.board_audio_dma_drain)
-    board_audio_dma_drain                    0x08002351   Thumb Code    62  record_board_audio.o(i.board_audio_dma_drain)
-    i.board_audio_dma_read_index             0x08002398   Section        0  record_board_audio.o(i.board_audio_dma_read_index)
-    board_audio_dma_read_index               0x08002399   Thumb Code    34  record_board_audio.o(i.board_audio_dma_read_index)
-    i.board_audio_dma_recover_if_underrun    0x080023c4   Section        0  record_board_audio.o(i.board_audio_dma_recover_if_underrun)
-    board_audio_dma_recover_if_underrun      0x080023c5   Thumb Code    46  record_board_audio.o(i.board_audio_dma_recover_if_underrun)
-    i.board_audio_dma_start                  0x080023fc   Section        0  record_board_audio.o(i.board_audio_dma_start)
-    board_audio_dma_start                    0x080023fd   Thumb Code   140  record_board_audio.o(i.board_audio_dma_start)
-    i.board_audio_dma_stop                   0x08002498   Section        0  record_board_audio.o(i.board_audio_dma_stop)
-    board_audio_dma_stop                     0x08002499   Thumb Code    38  record_board_audio.o(i.board_audio_dma_stop)
-    i.board_audio_dma_update_read_total      0x080024cc   Section        0  record_board_audio.o(i.board_audio_dma_update_read_total)
-    board_audio_dma_update_read_total        0x080024cd   Thumb Code    32  record_board_audio.o(i.board_audio_dma_update_read_total)
-    i.board_audio_dma_used_halfwords         0x080024f0   Section        0  record_board_audio.o(i.board_audio_dma_used_halfwords)
-    board_audio_dma_used_halfwords           0x080024f1   Thumb Code    22  record_board_audio.o(i.board_audio_dma_used_halfwords)
-    i.board_audio_dma_write_frame            0x0800250c   Section        0  record_board_audio.o(i.board_audio_dma_write_frame)
-    board_audio_dma_write_frame              0x0800250d   Thumb Code   168  record_board_audio.o(i.board_audio_dma_write_frame)
-    i.board_audio_drain                      0x080025c4   Section        0  record_board_audio.o(i.board_audio_drain)
-    i.board_audio_get_debug_info             0x080025c8   Section        0  record_board_audio.o(i.board_audio_get_debug_info)
-    i.board_audio_get_monitor_dac_volume_reg 0x080025d0   Section        0  record_board_audio.o(i.board_audio_get_monitor_dac_volume_reg)
-    i.board_audio_get_playback_volume_percent 0x080025d4   Section        0  record_board_audio.o(i.board_audio_get_playback_volume_percent)
-    i.board_audio_get_record_adc_scale_reg   0x080025d8   Section        0  record_board_audio.o(i.board_audio_get_record_adc_scale_reg)
-    i.board_audio_get_record_adc_volume_reg  0x080025dc   Section        0  record_board_audio.o(i.board_audio_get_record_adc_volume_reg)
-    i.board_audio_get_record_mic_path_reg    0x080025e0   Section        0  record_board_audio.o(i.board_audio_get_record_mic_path_reg)
-    i.board_audio_gpio_init                  0x080025e4   Section        0  record_board_audio.o(i.board_audio_gpio_init)
-    board_audio_gpio_init                    0x080025e5   Thumb Code   192  record_board_audio.o(i.board_audio_gpio_init)
-    i.board_audio_gpio_init_record_inputs    0x080026b4   Section        0  record_board_audio.o(i.board_audio_gpio_init_record_inputs)
-    board_audio_gpio_init_record_inputs      0x080026b5   Thumb Code    30  record_board_audio.o(i.board_audio_gpio_init_record_inputs)
-    i.board_audio_i2s_freq                   0x080026d8   Section        0  record_board_audio.o(i.board_audio_i2s_freq)
-    board_audio_i2s_freq                     0x080026d9   Thumb Code    94  record_board_audio.o(i.board_audio_i2s_freq)
-    i.board_audio_i2s_init_rx_rate           0x08002738   Section        0  record_board_audio.o(i.board_audio_i2s_init_rx_rate)
-    board_audio_i2s_init_rx_rate             0x08002739   Thumb Code   112  record_board_audio.o(i.board_audio_i2s_init_rx_rate)
-    i.board_audio_i2s_init_tx_rate           0x080027b0   Section        0  record_board_audio.o(i.board_audio_i2s_init_tx_rate)
-    board_audio_i2s_init_tx_rate             0x080027b1   Thumb Code   112  record_board_audio.o(i.board_audio_i2s_init_tx_rate)
-    i.board_audio_i2s_stop_quiet             0x08002828   Section        0  record_board_audio.o(i.board_audio_i2s_stop_quiet)
-    board_audio_i2s_stop_quiet               0x08002829   Thumb Code    46  record_board_audio.o(i.board_audio_i2s_stop_quiet)
-    i.board_audio_init_playback              0x0800285c   Section        0  record_board_audio.o(i.board_audio_init_playback)
-    i.board_audio_init_record_rate           0x080028b8   Section        0  record_board_audio.o(i.board_audio_init_record_rate)
-    i.board_audio_play_pcm                   0x08002934   Section        0  record_board_audio.o(i.board_audio_play_pcm)
-    i.board_audio_play_test_tone             0x08002a18   Section        0  record_board_audio.o(i.board_audio_play_test_tone)
-    i.board_audio_read_word                  0x08002a80   Section        0  record_board_audio.o(i.board_audio_read_word)
-    board_audio_read_word                    0x08002a81   Thumb Code   110  record_board_audio.o(i.board_audio_read_word)
-    i.board_audio_record_key_ready           0x08002afc   Section        0  record_board_audio.o(i.board_audio_record_key_ready)
-    board_audio_record_key_ready             0x08002afd   Thumb Code    94  record_board_audio.o(i.board_audio_record_key_ready)
-    i.board_audio_reset_debug                0x08002b60   Section        0  record_board_audio.o(i.board_audio_reset_debug)
-    board_audio_reset_debug                  0x08002b61   Thumb Code    46  record_board_audio.o(i.board_audio_reset_debug)
-    i.board_audio_scan_i2s_pins              0x08002b94   Section        0  record_board_audio.o(i.board_audio_scan_i2s_pins)
-    i.board_audio_set_sample_rate            0x08002d44   Section        0  record_board_audio.o(i.board_audio_set_sample_rate)
-    i.board_audio_stop_playback              0x08002d5c   Section        0  record_board_audio.o(i.board_audio_stop_playback)
-    i.board_audio_update_dma_debug           0x08002d78   Section        0  record_board_audio.o(i.board_audio_update_dma_debug)
-    board_audio_update_dma_debug             0x08002d79   Thumb Code    28  record_board_audio.o(i.board_audio_update_dma_debug)
-    i.board_audio_write_word                 0x08002d9c   Section        0  record_board_audio.o(i.board_audio_write_word)
-    board_audio_write_word                   0x08002d9d   Thumb Code    30  record_board_audio.o(i.board_audio_write_word)
-    i.check_text                             0x08002dc0   Section        0  record_main.o(i.check_text)
-    check_text                               0x08002dc1   Thumb Code    10  record_main.o(i.check_text)
-    i.codec_i2c_seen                         0x08002dd8   Section        0  record_main.o(i.codec_i2c_seen)
-    codec_i2c_seen                           0x08002dd9   Thumb Code    28  record_main.o(i.codec_i2c_seen)
-    i.delay_Init                             0x08002df4   Section        0  delay.o(i.delay_Init)
-    i.delay_ms                               0x08002dfc   Section        0  delay.o(i.delay_ms)
-    i.dump_board_audio_debug_ptr             0x08002e40   Section        0  record_main.o(i.dump_board_audio_debug_ptr)
-    dump_board_audio_debug_ptr               0x08002e41   Thumb Code   656  record_main.o(i.dump_board_audio_debug_ptr)
-    i.dump_playback_path_check               0x08003198   Section        0  record_main.o(i.dump_playback_path_check)
-    dump_playback_path_check                 0x08003199   Thumb Code   174  record_main.o(i.dump_playback_path_check)
-    i.dump_record_debug                      0x0800324c   Section        0  record_main.o(i.dump_record_debug)
-    dump_record_debug                        0x0800324d   Thumb Code   394  record_main.o(i.dump_record_debug)
-    i.dump_record_path_check                 0x080034e0   Section        0  record_main.o(i.dump_record_path_check)
-    dump_record_path_check                   0x080034e1   Thumb Code   408  record_main.o(i.dump_record_path_check)
-    i.es8311_probe                           0x08003688   Section        0  record_board_audio.o(i.es8311_probe)
-    es8311_probe                             0x08003689   Thumb Code   100  record_board_audio.o(i.es8311_probe)
-    i.es8311_probe_addr                      0x080036f4   Section        0  record_board_audio.o(i.es8311_probe_addr)
-    es8311_probe_addr                        0x080036f5   Thumb Code    80  record_board_audio.o(i.es8311_probe_addr)
-    i.es8311_read_reg                        0x08003748   Section        0  record_board_audio.o(i.es8311_read_reg)
-    es8311_read_reg                          0x08003749   Thumb Code    18  record_board_audio.o(i.es8311_read_reg)
-    i.es8311_read_reg_raw                    0x08003760   Section        0  record_board_audio.o(i.es8311_read_reg_raw)
-    es8311_read_reg_raw                      0x08003761   Thumb Code   132  record_board_audio.o(i.es8311_read_reg_raw)
-    i.es8311_write_reg                       0x080037e8   Section        0  record_board_audio.o(i.es8311_write_reg)
-    es8311_write_reg                         0x080037e9   Thumb Code    58  record_board_audio.o(i.es8311_write_reg)
-    i.fputc                                  0x0800382c   Section        0  usart.o(i.fputc)
-    i.i2c_capture_bus_state                  0x08003844   Section        0  record_board_audio.o(i.i2c_capture_bus_state)
-    i2c_capture_bus_state                    0x08003845   Thumb Code    30  record_board_audio.o(i.i2c_capture_bus_state)
-    i.i2c_line_drive_low                     0x0800386c   Section        0  record_board_audio.o(i.i2c_line_drive_low)
-    i2c_line_drive_low                       0x0800386d   Thumb Code    44  record_board_audio.o(i.i2c_line_drive_low)
-    i.i2c_line_input_pullup                  0x0800389c   Section        0  record_board_audio.o(i.i2c_line_input_pullup)
-    i2c_line_input_pullup                    0x0800389d   Thumb Code    44  record_board_audio.o(i.i2c_line_input_pullup)
-    i.i2c_sda_read                           0x080038cc   Section        0  record_board_audio.o(i.i2c_sda_read)
-    i2c_sda_read                             0x080038cd   Thumb Code     8  record_board_audio.o(i.i2c_sda_read)
-    i.i2c_start                              0x080038d8   Section        0  record_board_audio.o(i.i2c_start)
-    i2c_start                                0x080038d9   Thumb Code    30  record_board_audio.o(i.i2c_start)
-    i.i2c_stop                               0x080038f6   Section        0  record_board_audio.o(i.i2c_stop)
-    i2c_stop                                 0x080038f7   Thumb Code    24  record_board_audio.o(i.i2c_stop)
-    i.i2c_write_byte                         0x0800390e   Section        0  record_board_audio.o(i.i2c_write_byte)
-    i2c_write_byte                           0x0800390f   Thumb Code    82  record_board_audio.o(i.i2c_write_byte)
-    i.main                                   0x08003960   Section        0  record_main.o(i.main)
-    .constdata                               0x08003ba8   Section      420  record_audio_record.o(.constdata)
-    g_adpcm_index_table                      0x08003ba8   Data          64  record_audio_record.o(.constdata)
-    g_adpcm_step_table                       0x08003be8   Data         356  record_audio_record.o(.constdata)
-    .constdata                               0x08003d4c   Section       96  record_board_audio.o(.constdata)
-    audio_test_wave                          0x08003d4c   Data          96  record_board_audio.o(.constdata)
-    .constdata                               0x08003dac   Section       40  _printf_hex_int.o(.constdata)
-    uc_hextab                                0x08003dac   Data          20  _printf_hex_int.o(.constdata)
-    lc_hextab                                0x08003dc0   Data          20  _printf_hex_int.o(.constdata)
-    .constdata                               0x08003dd4   Section       17  __printf_flags_ss_wp.o(.constdata)
-    maptable                                 0x08003dd4   Data          17  __printf_flags_ss_wp.o(.constdata)
-    .conststring                             0x08003de8   Section     2535  record_main.o(.conststring)
-    .conststring                             0x080047d0   Section      424  record_audio_record.o(.conststring)
+    i.audio_record_get_debug_info            0x080019e8   Section        0  record_audio_record.o(i.audio_record_get_debug_info)
+    i.audio_record_play_adpcm                0x080019f0   Section        0  record_audio_record.o(i.audio_record_play_adpcm)
+    audio_record_play_adpcm                  0x080019f1   Thumb Code   222  record_audio_record.o(i.audio_record_play_adpcm)
+    i.audio_record_reset_stats               0x08001ae8   Section        0  record_audio_record.o(i.audio_record_reset_stats)
+    audio_record_reset_stats                 0x08001ae9   Thumb Code    60  record_audio_record.o(i.audio_record_reset_stats)
+    i.audio_record_stage_log                 0x08001b30   Section        0  record_audio_record.o(i.audio_record_stage_log)
+    audio_record_stage_log                   0x08001b31   Thumb Code   100  record_audio_record.o(i.audio_record_stage_log)
+    i.audio_record_update_capture_stats      0x08001b98   Section        0  record_audio_record.o(i.audio_record_update_capture_stats)
+    audio_record_update_capture_stats        0x08001b99   Thumb Code   112  record_audio_record.o(i.audio_record_update_capture_stats)
+    i.board_audio_abs16                      0x08001c18   Section        0  record_board_audio.o(i.board_audio_abs16)
+    board_audio_abs16                        0x08001c19   Thumb Code    20  record_board_audio.o(i.board_audio_abs16)
+    i.board_audio_apply_volume               0x08001c2c   Section        0  record_board_audio.o(i.board_audio_apply_volume)
+    board_audio_apply_volume                 0x08001c2d   Thumb Code    34  record_board_audio.o(i.board_audio_apply_volume)
+    i.board_audio_capture_debug_regs         0x08001c54   Section        0  record_board_audio.o(i.board_audio_capture_debug_regs)
+    board_audio_capture_debug_regs           0x08001c55   Thumb Code   742  record_board_audio.o(i.board_audio_capture_debug_regs)
+    i.board_audio_capture_mcu_debug          0x08001f54   Section        0  record_board_audio.o(i.board_audio_capture_mcu_debug)
+    board_audio_capture_mcu_debug            0x08001f55   Thumb Code    96  record_board_audio.o(i.board_audio_capture_mcu_debug)
+    i.board_audio_capture_mono_sample        0x08001fcc   Section        0  record_board_audio.o(i.board_audio_capture_mono_sample)
+    i.board_audio_capture_update_raw_debug   0x08002088   Section        0  record_board_audio.o(i.board_audio_capture_update_raw_debug)
+    board_audio_capture_update_raw_debug     0x08002089   Thumb Code   134  record_board_audio.o(i.board_audio_capture_update_raw_debug)
+    i.board_audio_codec_init_playback        0x08002114   Section        0  record_board_audio.o(i.board_audio_codec_init_playback)
+    board_audio_codec_init_playback          0x08002115   Thumb Code   412  record_board_audio.o(i.board_audio_codec_init_playback)
+    i.board_audio_codec_init_record          0x080022b4   Section        0  record_board_audio.o(i.board_audio_codec_init_record)
+    board_audio_codec_init_record            0x080022b5   Thumb Code   452  record_board_audio.o(i.board_audio_codec_init_record)
+    i.board_audio_dma_drain                  0x0800247c   Section        0  record_board_audio.o(i.board_audio_dma_drain)
+    board_audio_dma_drain                    0x0800247d   Thumb Code    62  record_board_audio.o(i.board_audio_dma_drain)
+    i.board_audio_dma_read_index             0x080024c4   Section        0  record_board_audio.o(i.board_audio_dma_read_index)
+    board_audio_dma_read_index               0x080024c5   Thumb Code    34  record_board_audio.o(i.board_audio_dma_read_index)
+    i.board_audio_dma_recover_if_underrun    0x080024f0   Section        0  record_board_audio.o(i.board_audio_dma_recover_if_underrun)
+    board_audio_dma_recover_if_underrun      0x080024f1   Thumb Code    46  record_board_audio.o(i.board_audio_dma_recover_if_underrun)
+    i.board_audio_dma_start                  0x08002528   Section        0  record_board_audio.o(i.board_audio_dma_start)
+    board_audio_dma_start                    0x08002529   Thumb Code   140  record_board_audio.o(i.board_audio_dma_start)
+    i.board_audio_dma_stop                   0x080025c4   Section        0  record_board_audio.o(i.board_audio_dma_stop)
+    board_audio_dma_stop                     0x080025c5   Thumb Code    38  record_board_audio.o(i.board_audio_dma_stop)
+    i.board_audio_dma_update_read_total      0x080025f8   Section        0  record_board_audio.o(i.board_audio_dma_update_read_total)
+    board_audio_dma_update_read_total        0x080025f9   Thumb Code    32  record_board_audio.o(i.board_audio_dma_update_read_total)
+    i.board_audio_dma_used_halfwords         0x0800261c   Section        0  record_board_audio.o(i.board_audio_dma_used_halfwords)
+    board_audio_dma_used_halfwords           0x0800261d   Thumb Code    22  record_board_audio.o(i.board_audio_dma_used_halfwords)
+    i.board_audio_dma_write_frame            0x08002638   Section        0  record_board_audio.o(i.board_audio_dma_write_frame)
+    board_audio_dma_write_frame              0x08002639   Thumb Code   168  record_board_audio.o(i.board_audio_dma_write_frame)
+    i.board_audio_drain                      0x080026f0   Section        0  record_board_audio.o(i.board_audio_drain)
+    i.board_audio_get_debug_info             0x080026f4   Section        0  record_board_audio.o(i.board_audio_get_debug_info)
+    i.board_audio_get_monitor_dac_volume_reg 0x080026fc   Section        0  record_board_audio.o(i.board_audio_get_monitor_dac_volume_reg)
+    i.board_audio_get_playback_volume_percent 0x08002700   Section        0  record_board_audio.o(i.board_audio_get_playback_volume_percent)
+    i.board_audio_get_record_adc_scale_reg   0x08002704   Section        0  record_board_audio.o(i.board_audio_get_record_adc_scale_reg)
+    i.board_audio_get_record_adc_volume_reg  0x08002708   Section        0  record_board_audio.o(i.board_audio_get_record_adc_volume_reg)
+    i.board_audio_get_record_mic_path_reg    0x0800270c   Section        0  record_board_audio.o(i.board_audio_get_record_mic_path_reg)
+    i.board_audio_gpio_init                  0x08002710   Section        0  record_board_audio.o(i.board_audio_gpio_init)
+    board_audio_gpio_init                    0x08002711   Thumb Code   210  record_board_audio.o(i.board_audio_gpio_init)
+    i.board_audio_gpio_init_record_inputs    0x080027f4   Section        0  record_board_audio.o(i.board_audio_gpio_init_record_inputs)
+    board_audio_gpio_init_record_inputs      0x080027f5   Thumb Code    30  record_board_audio.o(i.board_audio_gpio_init_record_inputs)
+    i.board_audio_i2s_freq                   0x08002818   Section        0  record_board_audio.o(i.board_audio_i2s_freq)
+    board_audio_i2s_freq                     0x08002819   Thumb Code    94  record_board_audio.o(i.board_audio_i2s_freq)
+    i.board_audio_i2s_init_rx_rate           0x08002878   Section        0  record_board_audio.o(i.board_audio_i2s_init_rx_rate)
+    board_audio_i2s_init_rx_rate             0x08002879   Thumb Code   112  record_board_audio.o(i.board_audio_i2s_init_rx_rate)
+    i.board_audio_i2s_init_tx_rate           0x080028f0   Section        0  record_board_audio.o(i.board_audio_i2s_init_tx_rate)
+    board_audio_i2s_init_tx_rate             0x080028f1   Thumb Code   112  record_board_audio.o(i.board_audio_i2s_init_tx_rate)
+    i.board_audio_i2s_stop_quiet             0x08002968   Section        0  record_board_audio.o(i.board_audio_i2s_stop_quiet)
+    board_audio_i2s_stop_quiet               0x08002969   Thumb Code    46  record_board_audio.o(i.board_audio_i2s_stop_quiet)
+    i.board_audio_init_playback              0x0800299c   Section        0  record_board_audio.o(i.board_audio_init_playback)
+    i.board_audio_init_record_rate           0x08002a14   Section        0  record_board_audio.o(i.board_audio_init_record_rate)
+    i.board_audio_play_pcm                   0x08002a90   Section        0  record_board_audio.o(i.board_audio_play_pcm)
+    i.board_audio_play_test_tone             0x08002b74   Section        0  record_board_audio.o(i.board_audio_play_test_tone)
+    i.board_audio_read_word                  0x08002bdc   Section        0  record_board_audio.o(i.board_audio_read_word)
+    board_audio_read_word                    0x08002bdd   Thumb Code   110  record_board_audio.o(i.board_audio_read_word)
+    i.board_audio_record_key_ready           0x08002c58   Section        0  record_board_audio.o(i.board_audio_record_key_ready)
+    board_audio_record_key_ready             0x08002c59   Thumb Code    94  record_board_audio.o(i.board_audio_record_key_ready)
+    i.board_audio_reset_debug                0x08002cbc   Section        0  record_board_audio.o(i.board_audio_reset_debug)
+    board_audio_reset_debug                  0x08002cbd   Thumb Code    46  record_board_audio.o(i.board_audio_reset_debug)
+    i.board_audio_scan_i2s_pins              0x08002cf0   Section        0  record_board_audio.o(i.board_audio_scan_i2s_pins)
+    i.board_audio_set_sample_rate            0x08002ea0   Section        0  record_board_audio.o(i.board_audio_set_sample_rate)
+    i.board_audio_stop_playback              0x08002eb8   Section        0  record_board_audio.o(i.board_audio_stop_playback)
+    i.board_audio_update_dma_debug           0x08002ed4   Section        0  record_board_audio.o(i.board_audio_update_dma_debug)
+    board_audio_update_dma_debug             0x08002ed5   Thumb Code    28  record_board_audio.o(i.board_audio_update_dma_debug)
+    i.board_audio_write_word                 0x08002ef8   Section        0  record_board_audio.o(i.board_audio_write_word)
+    board_audio_write_word                   0x08002ef9   Thumb Code    30  record_board_audio.o(i.board_audio_write_word)
+    i.check_text                             0x08002f1c   Section        0  record_main.o(i.check_text)
+    check_text                               0x08002f1d   Thumb Code    10  record_main.o(i.check_text)
+    i.codec_i2c_seen                         0x08002f34   Section        0  record_main.o(i.codec_i2c_seen)
+    codec_i2c_seen                           0x08002f35   Thumb Code    28  record_main.o(i.codec_i2c_seen)
+    i.delay_Init                             0x08002f50   Section        0  delay.o(i.delay_Init)
+    i.delay_ms                               0x08002f58   Section        0  delay.o(i.delay_ms)
+    i.dump_board_audio_debug_ptr             0x08002f9c   Section        0  record_main.o(i.dump_board_audio_debug_ptr)
+    dump_board_audio_debug_ptr               0x08002f9d   Thumb Code   656  record_main.o(i.dump_board_audio_debug_ptr)
+    i.dump_playback_path_check               0x080032f4   Section        0  record_main.o(i.dump_playback_path_check)
+    dump_playback_path_check                 0x080032f5   Thumb Code   172  record_main.o(i.dump_playback_path_check)
+    i.dump_record_debug                      0x080033b0   Section        0  record_main.o(i.dump_record_debug)
+    dump_record_debug                        0x080033b1   Thumb Code   310  record_main.o(i.dump_record_debug)
+    i.dump_record_path_check                 0x080035dc   Section        0  record_main.o(i.dump_record_path_check)
+    dump_record_path_check                   0x080035dd   Thumb Code   408  record_main.o(i.dump_record_path_check)
+    i.es8311_probe                           0x08003784   Section        0  record_board_audio.o(i.es8311_probe)
+    es8311_probe                             0x08003785   Thumb Code   100  record_board_audio.o(i.es8311_probe)
+    i.es8311_probe_addr                      0x080037f0   Section        0  record_board_audio.o(i.es8311_probe_addr)
+    es8311_probe_addr                        0x080037f1   Thumb Code    80  record_board_audio.o(i.es8311_probe_addr)
+    i.es8311_read_reg                        0x08003844   Section        0  record_board_audio.o(i.es8311_read_reg)
+    es8311_read_reg                          0x08003845   Thumb Code    18  record_board_audio.o(i.es8311_read_reg)
+    i.es8311_read_reg_raw                    0x0800385c   Section        0  record_board_audio.o(i.es8311_read_reg_raw)
+    es8311_read_reg_raw                      0x0800385d   Thumb Code   132  record_board_audio.o(i.es8311_read_reg_raw)
+    i.es8311_write_reg                       0x080038e4   Section        0  record_board_audio.o(i.es8311_write_reg)
+    es8311_write_reg                         0x080038e5   Thumb Code    58  record_board_audio.o(i.es8311_write_reg)
+    i.fputc                                  0x08003928   Section        0  usart.o(i.fputc)
+    i.i2c_capture_bus_state                  0x08003940   Section        0  record_board_audio.o(i.i2c_capture_bus_state)
+    i2c_capture_bus_state                    0x08003941   Thumb Code    30  record_board_audio.o(i.i2c_capture_bus_state)
+    i.i2c_line_drive_low                     0x08003968   Section        0  record_board_audio.o(i.i2c_line_drive_low)
+    i2c_line_drive_low                       0x08003969   Thumb Code    44  record_board_audio.o(i.i2c_line_drive_low)
+    i.i2c_line_input_pullup                  0x08003998   Section        0  record_board_audio.o(i.i2c_line_input_pullup)
+    i2c_line_input_pullup                    0x08003999   Thumb Code    44  record_board_audio.o(i.i2c_line_input_pullup)
+    i.i2c_sda_read                           0x080039c8   Section        0  record_board_audio.o(i.i2c_sda_read)
+    i2c_sda_read                             0x080039c9   Thumb Code     8  record_board_audio.o(i.i2c_sda_read)
+    i.i2c_start                              0x080039d4   Section        0  record_board_audio.o(i.i2c_start)
+    i2c_start                                0x080039d5   Thumb Code    30  record_board_audio.o(i.i2c_start)
+    i.i2c_stop                               0x080039f2   Section        0  record_board_audio.o(i.i2c_stop)
+    i2c_stop                                 0x080039f3   Thumb Code    24  record_board_audio.o(i.i2c_stop)
+    i.i2c_write_byte                         0x08003a0a   Section        0  record_board_audio.o(i.i2c_write_byte)
+    i2c_write_byte                           0x08003a0b   Thumb Code    82  record_board_audio.o(i.i2c_write_byte)
+    i.main                                   0x08003a5c   Section        0  record_main.o(i.main)
+    .constdata                               0x08003cac   Section      420  record_audio_record.o(.constdata)
+    g_adpcm_index_table                      0x08003cac   Data          64  record_audio_record.o(.constdata)
+    g_adpcm_step_table                       0x08003cec   Data         356  record_audio_record.o(.constdata)
+    .constdata                               0x08003e50   Section       96  record_board_audio.o(.constdata)
+    audio_test_wave                          0x08003e50   Data          96  record_board_audio.o(.constdata)
+    .constdata                               0x08003eb0   Section       40  _printf_hex_int.o(.constdata)
+    uc_hextab                                0x08003eb0   Data          20  _printf_hex_int.o(.constdata)
+    lc_hextab                                0x08003ec4   Data          20  _printf_hex_int.o(.constdata)
+    .constdata                               0x08003ed8   Section       17  __printf_flags_ss_wp.o(.constdata)
+    maptable                                 0x08003ed8   Data          17  __printf_flags_ss_wp.o(.constdata)
+    .conststring                             0x08003eec   Section     2395  record_main.o(.conststring)
+    .conststring                             0x08004848   Section      424  record_audio_record.o(.conststring)
     .data                                    0x20000000   Section        1  exti.o(.data)
     .data                                    0x20000001   Section        2  usart.o(.data)
     .data                                    0x20000004   Section        4  usart.o(.data)
@@ -1768,29 +1768,29 @@ Image Symbol Table
     UsageFault_Handler                       0x080011a9   Thumb Code     2  stm32f10x_it.o(i.UsageFault_Handler)
     _is_digit                                0x080011ab   Thumb Code    14  __printf_wp.o(i._is_digit)
     _sys_exit                                0x080011b9   Thumb Code     2  usart.o(i._sys_exit)
-    audio_record_demo_once                   0x08001389   Thumb Code   704  record_audio_record.o(i.audio_record_demo_once)
-    audio_record_get_debug_info              0x080018ed   Thumb Code     4  record_audio_record.o(i.audio_record_get_debug_info)
-    board_audio_capture_mono_sample          0x08001ed1   Thumb Code   134  record_board_audio.o(i.board_audio_capture_mono_sample)
-    board_audio_drain                        0x080025c5   Thumb Code     4  record_board_audio.o(i.board_audio_drain)
-    board_audio_get_debug_info               0x080025c9   Thumb Code     4  record_board_audio.o(i.board_audio_get_debug_info)
-    board_audio_get_monitor_dac_volume_reg   0x080025d1   Thumb Code     4  record_board_audio.o(i.board_audio_get_monitor_dac_volume_reg)
-    board_audio_get_playback_volume_percent  0x080025d5   Thumb Code     4  record_board_audio.o(i.board_audio_get_playback_volume_percent)
-    board_audio_get_record_adc_scale_reg     0x080025d9   Thumb Code     4  record_board_audio.o(i.board_audio_get_record_adc_scale_reg)
-    board_audio_get_record_adc_volume_reg    0x080025dd   Thumb Code     4  record_board_audio.o(i.board_audio_get_record_adc_volume_reg)
-    board_audio_get_record_mic_path_reg      0x080025e1   Thumb Code     4  record_board_audio.o(i.board_audio_get_record_mic_path_reg)
-    board_audio_init_playback                0x0800285d   Thumb Code    82  record_board_audio.o(i.board_audio_init_playback)
-    board_audio_init_record_rate             0x080028b9   Thumb Code   116  record_board_audio.o(i.board_audio_init_record_rate)
-    board_audio_play_pcm                     0x08002935   Thumb Code   212  record_board_audio.o(i.board_audio_play_pcm)
-    board_audio_play_test_tone               0x08002a19   Thumb Code    96  record_board_audio.o(i.board_audio_play_test_tone)
-    board_audio_scan_i2s_pins                0x08002b95   Thumb Code   416  record_board_audio.o(i.board_audio_scan_i2s_pins)
-    board_audio_set_sample_rate              0x08002d45   Thumb Code    18  record_board_audio.o(i.board_audio_set_sample_rate)
-    board_audio_stop_playback                0x08002d5d   Thumb Code    24  record_board_audio.o(i.board_audio_stop_playback)
-    delay_Init                               0x08002df5   Thumb Code     8  delay.o(i.delay_Init)
-    delay_ms                                 0x08002dfd   Thumb Code    68  delay.o(i.delay_ms)
-    fputc                                    0x0800382d   Thumb Code    18  usart.o(i.fputc)
-    main                                     0x08003961   Thumb Code   216  record_main.o(i.main)
-    Region$$Table$$Base                      0x08004978   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08004998   Number         0  anon$$obj.o(Region$$Table)
+    audio_record_demo_once                   0x08001389   Thumb Code   742  record_audio_record.o(i.audio_record_demo_once)
+    audio_record_get_debug_info              0x080019e9   Thumb Code     4  record_audio_record.o(i.audio_record_get_debug_info)
+    board_audio_capture_mono_sample          0x08001fcd   Thumb Code   178  record_board_audio.o(i.board_audio_capture_mono_sample)
+    board_audio_drain                        0x080026f1   Thumb Code     4  record_board_audio.o(i.board_audio_drain)
+    board_audio_get_debug_info               0x080026f5   Thumb Code     4  record_board_audio.o(i.board_audio_get_debug_info)
+    board_audio_get_monitor_dac_volume_reg   0x080026fd   Thumb Code     4  record_board_audio.o(i.board_audio_get_monitor_dac_volume_reg)
+    board_audio_get_playback_volume_percent  0x08002701   Thumb Code     4  record_board_audio.o(i.board_audio_get_playback_volume_percent)
+    board_audio_get_record_adc_scale_reg     0x08002705   Thumb Code     4  record_board_audio.o(i.board_audio_get_record_adc_scale_reg)
+    board_audio_get_record_adc_volume_reg    0x08002709   Thumb Code     4  record_board_audio.o(i.board_audio_get_record_adc_volume_reg)
+    board_audio_get_record_mic_path_reg      0x0800270d   Thumb Code     4  record_board_audio.o(i.board_audio_get_record_mic_path_reg)
+    board_audio_init_playback                0x0800299d   Thumb Code   108  record_board_audio.o(i.board_audio_init_playback)
+    board_audio_init_record_rate             0x08002a15   Thumb Code   116  record_board_audio.o(i.board_audio_init_record_rate)
+    board_audio_play_pcm                     0x08002a91   Thumb Code   212  record_board_audio.o(i.board_audio_play_pcm)
+    board_audio_play_test_tone               0x08002b75   Thumb Code    96  record_board_audio.o(i.board_audio_play_test_tone)
+    board_audio_scan_i2s_pins                0x08002cf1   Thumb Code   416  record_board_audio.o(i.board_audio_scan_i2s_pins)
+    board_audio_set_sample_rate              0x08002ea1   Thumb Code    18  record_board_audio.o(i.board_audio_set_sample_rate)
+    board_audio_stop_playback                0x08002eb9   Thumb Code    24  record_board_audio.o(i.board_audio_stop_playback)
+    delay_Init                               0x08002f51   Thumb Code     8  delay.o(i.delay_Init)
+    delay_ms                                 0x08002f59   Thumb Code    68  delay.o(i.delay_ms)
+    fputc                                    0x08003929   Thumb Code    18  usart.o(i.fputc)
+    main                                     0x08003a5d   Thumb Code   216  record_main.o(i.main)
+    Region$$Table$$Base                      0x080049f0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08004a10   Number         0  anon$$obj.o(Region$$Table)
     LED2_BitVal                              0x20000000   Data           1  exti.o(.data)
     U1Rx_LEN                                 0x20000001   Data           1  usart.o(.data)
     U1Rx_IDLE_FLAG                           0x20000002   Data           1  usart.o(.data)
@@ -1807,9 +1807,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000131
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000049e8, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00004a60, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00004998, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00004a10, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1950,103 +1950,103 @@ Memory Map of the image
     0x08001244   0x08001244   0x00000080   Code   RO          381    i.audio_record_adpcm_encode_sample  record_audio_record.o
     0x080012c4   0x080012c4   0x000000a8   Code   RO          382    i.audio_record_capture_adpcm  record_audio_record.o
     0x0800136c   0x0800136c   0x0000001c   Code   RO          383    i.audio_record_clamp_int16  record_audio_record.o
-    0x08001388   0x08001388   0x00000564   Code   RO          384    i.audio_record_demo_once  record_audio_record.o
-    0x080018ec   0x080018ec   0x00000008   Code   RO          385    i.audio_record_get_debug_info  record_audio_record.o
-    0x080018f4   0x080018f4   0x000000f8   Code   RO          386    i.audio_record_play_adpcm  record_audio_record.o
-    0x080019ec   0x080019ec   0x00000048   Code   RO          387    i.audio_record_reset_stats  record_audio_record.o
-    0x08001a34   0x08001a34   0x00000068   Code   RO          388    i.audio_record_stage_log  record_audio_record.o
-    0x08001a9c   0x08001a9c   0x00000080   Code   RO          389    i.audio_record_update_capture_stats  record_audio_record.o
-    0x08001b1c   0x08001b1c   0x00000014   Code   RO          455    i.board_audio_abs16  record_board_audio.o
-    0x08001b30   0x08001b30   0x00000028   Code   RO          459    i.board_audio_apply_volume  record_board_audio.o
-    0x08001b58   0x08001b58   0x00000300   Code   RO          460    i.board_audio_capture_debug_regs  record_board_audio.o
-    0x08001e58   0x08001e58   0x00000078   Code   RO          461    i.board_audio_capture_mcu_debug  record_board_audio.o
-    0x08001ed0   0x08001ed0   0x0000008c   Code   RO          462    i.board_audio_capture_mono_sample  record_board_audio.o
-    0x08001f5c   0x08001f5c   0x0000008c   Code   RO          465    i.board_audio_capture_update_raw_debug  record_board_audio.o
-    0x08001fe8   0x08001fe8   0x000001a0   Code   RO          466    i.board_audio_codec_init_playback  record_board_audio.o
-    0x08002188   0x08002188   0x000001c8   Code   RO          467    i.board_audio_codec_init_record  record_board_audio.o
-    0x08002350   0x08002350   0x00000048   Code   RO          469    i.board_audio_dma_drain  record_board_audio.o
-    0x08002398   0x08002398   0x0000002c   Code   RO          470    i.board_audio_dma_read_index  record_board_audio.o
-    0x080023c4   0x080023c4   0x00000038   Code   RO          471    i.board_audio_dma_recover_if_underrun  record_board_audio.o
-    0x080023fc   0x080023fc   0x0000009c   Code   RO          472    i.board_audio_dma_start  record_board_audio.o
-    0x08002498   0x08002498   0x00000034   Code   RO          473    i.board_audio_dma_stop  record_board_audio.o
-    0x080024cc   0x080024cc   0x00000024   Code   RO          474    i.board_audio_dma_update_read_total  record_board_audio.o
-    0x080024f0   0x080024f0   0x0000001c   Code   RO          475    i.board_audio_dma_used_halfwords  record_board_audio.o
-    0x0800250c   0x0800250c   0x000000b8   Code   RO          476    i.board_audio_dma_write_frame  record_board_audio.o
-    0x080025c4   0x080025c4   0x00000004   Code   RO          477    i.board_audio_drain  record_board_audio.o
-    0x080025c8   0x080025c8   0x00000008   Code   RO          478    i.board_audio_get_debug_info  record_board_audio.o
-    0x080025d0   0x080025d0   0x00000004   Code   RO          479    i.board_audio_get_monitor_dac_volume_reg  record_board_audio.o
-    0x080025d4   0x080025d4   0x00000004   Code   RO          480    i.board_audio_get_playback_volume_percent  record_board_audio.o
-    0x080025d8   0x080025d8   0x00000004   Code   RO          481    i.board_audio_get_record_adc_scale_reg  record_board_audio.o
-    0x080025dc   0x080025dc   0x00000004   Code   RO          482    i.board_audio_get_record_adc_volume_reg  record_board_audio.o
-    0x080025e0   0x080025e0   0x00000004   Code   RO          483    i.board_audio_get_record_mic_path_reg  record_board_audio.o
-    0x080025e4   0x080025e4   0x000000d0   Code   RO          485    i.board_audio_gpio_init  record_board_audio.o
-    0x080026b4   0x080026b4   0x00000024   Code   RO          486    i.board_audio_gpio_init_record_inputs  record_board_audio.o
-    0x080026d8   0x080026d8   0x0000005e   Code   RO          487    i.board_audio_i2s_freq  record_board_audio.o
-    0x08002736   0x08002736   0x00000002   PAD
-    0x08002738   0x08002738   0x00000078   Code   RO          488    i.board_audio_i2s_init_rx_rate  record_board_audio.o
-    0x080027b0   0x080027b0   0x00000078   Code   RO          489    i.board_audio_i2s_init_tx_rate  record_board_audio.o
-    0x08002828   0x08002828   0x00000034   Code   RO          490    i.board_audio_i2s_stop_quiet  record_board_audio.o
-    0x0800285c   0x0800285c   0x0000005c   Code   RO          492    i.board_audio_init_playback  record_board_audio.o
-    0x080028b8   0x080028b8   0x0000007c   Code   RO          494    i.board_audio_init_record_rate  record_board_audio.o
-    0x08002934   0x08002934   0x000000e4   Code   RO          495    i.board_audio_play_pcm  record_board_audio.o
-    0x08002a18   0x08002a18   0x00000068   Code   RO          496    i.board_audio_play_test_tone  record_board_audio.o
-    0x08002a80   0x08002a80   0x0000007c   Code   RO          498    i.board_audio_read_word  record_board_audio.o
-    0x08002afc   0x08002afc   0x00000064   Code   RO          499    i.board_audio_record_key_ready  record_board_audio.o
-    0x08002b60   0x08002b60   0x00000034   Code   RO          500    i.board_audio_reset_debug  record_board_audio.o
-    0x08002b94   0x08002b94   0x000001b0   Code   RO          501    i.board_audio_scan_i2s_pins  record_board_audio.o
-    0x08002d44   0x08002d44   0x00000018   Code   RO          502    i.board_audio_set_sample_rate  record_board_audio.o
-    0x08002d5c   0x08002d5c   0x0000001c   Code   RO          507    i.board_audio_stop_playback  record_board_audio.o
-    0x08002d78   0x08002d78   0x00000024   Code   RO          508    i.board_audio_update_dma_debug  record_board_audio.o
-    0x08002d9c   0x08002d9c   0x00000024   Code   RO          509    i.board_audio_write_word  record_board_audio.o
-    0x08002dc0   0x08002dc0   0x00000018   Code   RO          141    i.check_text        record_main.o
-    0x08002dd8   0x08002dd8   0x0000001c   Code   RO          142    i.codec_i2c_seen    record_main.o
-    0x08002df4   0x08002df4   0x00000008   Code   RO          289    i.delay_Init        delay.o
-    0x08002dfc   0x08002dfc   0x00000044   Code   RO          290    i.delay_ms          delay.o
-    0x08002e40   0x08002e40   0x00000358   Code   RO          143    i.dump_board_audio_debug_ptr  record_main.o
-    0x08003198   0x08003198   0x000000b4   Code   RO          144    i.dump_playback_path_check  record_main.o
-    0x0800324c   0x0800324c   0x00000294   Code   RO          145    i.dump_record_debug  record_main.o
-    0x080034e0   0x080034e0   0x000001a8   Code   RO          146    i.dump_record_path_check  record_main.o
-    0x08003688   0x08003688   0x0000006c   Code   RO          510    i.es8311_probe      record_board_audio.o
-    0x080036f4   0x080036f4   0x00000054   Code   RO          511    i.es8311_probe_addr  record_board_audio.o
-    0x08003748   0x08003748   0x00000018   Code   RO          512    i.es8311_read_reg   record_board_audio.o
-    0x08003760   0x08003760   0x00000088   Code   RO          513    i.es8311_read_reg_raw  record_board_audio.o
-    0x080037e8   0x080037e8   0x00000044   Code   RO          514    i.es8311_write_reg  record_board_audio.o
-    0x0800382c   0x0800382c   0x00000018   Code   RO          340    i.fputc             usart.o
-    0x08003844   0x08003844   0x00000028   Code   RO          516    i.i2c_capture_bus_state  record_board_audio.o
-    0x0800386c   0x0800386c   0x00000030   Code   RO          517    i.i2c_line_drive_low  record_board_audio.o
-    0x0800389c   0x0800389c   0x00000030   Code   RO          518    i.i2c_line_input_pullup  record_board_audio.o
-    0x080038cc   0x080038cc   0x0000000c   Code   RO          519    i.i2c_sda_read      record_board_audio.o
-    0x080038d8   0x080038d8   0x0000001e   Code   RO          520    i.i2c_start         record_board_audio.o
-    0x080038f6   0x080038f6   0x00000018   Code   RO          521    i.i2c_stop          record_board_audio.o
-    0x0800390e   0x0800390e   0x00000052   Code   RO          522    i.i2c_write_byte    record_board_audio.o
-    0x08003960   0x08003960   0x00000248   Code   RO          147    i.main              record_main.o
-    0x08003ba8   0x08003ba8   0x000001a4   Data   RO          391    .constdata          record_audio_record.o
-    0x08003d4c   0x08003d4c   0x00000060   Data   RO          524    .constdata          record_board_audio.o
-    0x08003dac   0x08003dac   0x00000028   Data   RO         3810    .constdata          c_w.l(_printf_hex_int.o)
-    0x08003dd4   0x08003dd4   0x00000011   Data   RO         3845    .constdata          c_w.l(__printf_flags_ss_wp.o)
-    0x08003de5   0x08003de5   0x00000003   PAD
-    0x08003de8   0x08003de8   0x000009e7   Data   RO          148    .conststring        record_main.o
-    0x080047cf   0x080047cf   0x00000001   PAD
-    0x080047d0   0x080047d0   0x000001a8   Data   RO          392    .conststring        record_audio_record.o
-    0x08004978   0x08004978   0x00000020   Data   RO         4040    Region$$Table       anon$$obj.o
+    0x08001388   0x08001388   0x00000660   Code   RO          384    i.audio_record_demo_once  record_audio_record.o
+    0x080019e8   0x080019e8   0x00000008   Code   RO          385    i.audio_record_get_debug_info  record_audio_record.o
+    0x080019f0   0x080019f0   0x000000f8   Code   RO          386    i.audio_record_play_adpcm  record_audio_record.o
+    0x08001ae8   0x08001ae8   0x00000048   Code   RO          387    i.audio_record_reset_stats  record_audio_record.o
+    0x08001b30   0x08001b30   0x00000068   Code   RO          388    i.audio_record_stage_log  record_audio_record.o
+    0x08001b98   0x08001b98   0x00000080   Code   RO          389    i.audio_record_update_capture_stats  record_audio_record.o
+    0x08001c18   0x08001c18   0x00000014   Code   RO          455    i.board_audio_abs16  record_board_audio.o
+    0x08001c2c   0x08001c2c   0x00000028   Code   RO          459    i.board_audio_apply_volume  record_board_audio.o
+    0x08001c54   0x08001c54   0x00000300   Code   RO          460    i.board_audio_capture_debug_regs  record_board_audio.o
+    0x08001f54   0x08001f54   0x00000078   Code   RO          461    i.board_audio_capture_mcu_debug  record_board_audio.o
+    0x08001fcc   0x08001fcc   0x000000bc   Code   RO          462    i.board_audio_capture_mono_sample  record_board_audio.o
+    0x08002088   0x08002088   0x0000008c   Code   RO          465    i.board_audio_capture_update_raw_debug  record_board_audio.o
+    0x08002114   0x08002114   0x000001a0   Code   RO          466    i.board_audio_codec_init_playback  record_board_audio.o
+    0x080022b4   0x080022b4   0x000001c8   Code   RO          467    i.board_audio_codec_init_record  record_board_audio.o
+    0x0800247c   0x0800247c   0x00000048   Code   RO          469    i.board_audio_dma_drain  record_board_audio.o
+    0x080024c4   0x080024c4   0x0000002c   Code   RO          470    i.board_audio_dma_read_index  record_board_audio.o
+    0x080024f0   0x080024f0   0x00000038   Code   RO          471    i.board_audio_dma_recover_if_underrun  record_board_audio.o
+    0x08002528   0x08002528   0x0000009c   Code   RO          472    i.board_audio_dma_start  record_board_audio.o
+    0x080025c4   0x080025c4   0x00000034   Code   RO          473    i.board_audio_dma_stop  record_board_audio.o
+    0x080025f8   0x080025f8   0x00000024   Code   RO          474    i.board_audio_dma_update_read_total  record_board_audio.o
+    0x0800261c   0x0800261c   0x0000001c   Code   RO          475    i.board_audio_dma_used_halfwords  record_board_audio.o
+    0x08002638   0x08002638   0x000000b8   Code   RO          476    i.board_audio_dma_write_frame  record_board_audio.o
+    0x080026f0   0x080026f0   0x00000004   Code   RO          477    i.board_audio_drain  record_board_audio.o
+    0x080026f4   0x080026f4   0x00000008   Code   RO          478    i.board_audio_get_debug_info  record_board_audio.o
+    0x080026fc   0x080026fc   0x00000004   Code   RO          479    i.board_audio_get_monitor_dac_volume_reg  record_board_audio.o
+    0x08002700   0x08002700   0x00000004   Code   RO          480    i.board_audio_get_playback_volume_percent  record_board_audio.o
+    0x08002704   0x08002704   0x00000004   Code   RO          481    i.board_audio_get_record_adc_scale_reg  record_board_audio.o
+    0x08002708   0x08002708   0x00000004   Code   RO          482    i.board_audio_get_record_adc_volume_reg  record_board_audio.o
+    0x0800270c   0x0800270c   0x00000004   Code   RO          483    i.board_audio_get_record_mic_path_reg  record_board_audio.o
+    0x08002710   0x08002710   0x000000e4   Code   RO          485    i.board_audio_gpio_init  record_board_audio.o
+    0x080027f4   0x080027f4   0x00000024   Code   RO          486    i.board_audio_gpio_init_record_inputs  record_board_audio.o
+    0x08002818   0x08002818   0x0000005e   Code   RO          487    i.board_audio_i2s_freq  record_board_audio.o
+    0x08002876   0x08002876   0x00000002   PAD
+    0x08002878   0x08002878   0x00000078   Code   RO          488    i.board_audio_i2s_init_rx_rate  record_board_audio.o
+    0x080028f0   0x080028f0   0x00000078   Code   RO          489    i.board_audio_i2s_init_tx_rate  record_board_audio.o
+    0x08002968   0x08002968   0x00000034   Code   RO          490    i.board_audio_i2s_stop_quiet  record_board_audio.o
+    0x0800299c   0x0800299c   0x00000078   Code   RO          492    i.board_audio_init_playback  record_board_audio.o
+    0x08002a14   0x08002a14   0x0000007c   Code   RO          494    i.board_audio_init_record_rate  record_board_audio.o
+    0x08002a90   0x08002a90   0x000000e4   Code   RO          495    i.board_audio_play_pcm  record_board_audio.o
+    0x08002b74   0x08002b74   0x00000068   Code   RO          496    i.board_audio_play_test_tone  record_board_audio.o
+    0x08002bdc   0x08002bdc   0x0000007c   Code   RO          498    i.board_audio_read_word  record_board_audio.o
+    0x08002c58   0x08002c58   0x00000064   Code   RO          499    i.board_audio_record_key_ready  record_board_audio.o
+    0x08002cbc   0x08002cbc   0x00000034   Code   RO          500    i.board_audio_reset_debug  record_board_audio.o
+    0x08002cf0   0x08002cf0   0x000001b0   Code   RO          501    i.board_audio_scan_i2s_pins  record_board_audio.o
+    0x08002ea0   0x08002ea0   0x00000018   Code   RO          502    i.board_audio_set_sample_rate  record_board_audio.o
+    0x08002eb8   0x08002eb8   0x0000001c   Code   RO          507    i.board_audio_stop_playback  record_board_audio.o
+    0x08002ed4   0x08002ed4   0x00000024   Code   RO          508    i.board_audio_update_dma_debug  record_board_audio.o
+    0x08002ef8   0x08002ef8   0x00000024   Code   RO          509    i.board_audio_write_word  record_board_audio.o
+    0x08002f1c   0x08002f1c   0x00000018   Code   RO          141    i.check_text        record_main.o
+    0x08002f34   0x08002f34   0x0000001c   Code   RO          142    i.codec_i2c_seen    record_main.o
+    0x08002f50   0x08002f50   0x00000008   Code   RO          289    i.delay_Init        delay.o
+    0x08002f58   0x08002f58   0x00000044   Code   RO          290    i.delay_ms          delay.o
+    0x08002f9c   0x08002f9c   0x00000358   Code   RO          143    i.dump_board_audio_debug_ptr  record_main.o
+    0x080032f4   0x080032f4   0x000000bc   Code   RO          144    i.dump_playback_path_check  record_main.o
+    0x080033b0   0x080033b0   0x0000022c   Code   RO          145    i.dump_record_debug  record_main.o
+    0x080035dc   0x080035dc   0x000001a8   Code   RO          146    i.dump_record_path_check  record_main.o
+    0x08003784   0x08003784   0x0000006c   Code   RO          510    i.es8311_probe      record_board_audio.o
+    0x080037f0   0x080037f0   0x00000054   Code   RO          511    i.es8311_probe_addr  record_board_audio.o
+    0x08003844   0x08003844   0x00000018   Code   RO          512    i.es8311_read_reg   record_board_audio.o
+    0x0800385c   0x0800385c   0x00000088   Code   RO          513    i.es8311_read_reg_raw  record_board_audio.o
+    0x080038e4   0x080038e4   0x00000044   Code   RO          514    i.es8311_write_reg  record_board_audio.o
+    0x08003928   0x08003928   0x00000018   Code   RO          340    i.fputc             usart.o
+    0x08003940   0x08003940   0x00000028   Code   RO          516    i.i2c_capture_bus_state  record_board_audio.o
+    0x08003968   0x08003968   0x00000030   Code   RO          517    i.i2c_line_drive_low  record_board_audio.o
+    0x08003998   0x08003998   0x00000030   Code   RO          518    i.i2c_line_input_pullup  record_board_audio.o
+    0x080039c8   0x080039c8   0x0000000c   Code   RO          519    i.i2c_sda_read      record_board_audio.o
+    0x080039d4   0x080039d4   0x0000001e   Code   RO          520    i.i2c_start         record_board_audio.o
+    0x080039f2   0x080039f2   0x00000018   Code   RO          521    i.i2c_stop          record_board_audio.o
+    0x08003a0a   0x08003a0a   0x00000052   Code   RO          522    i.i2c_write_byte    record_board_audio.o
+    0x08003a5c   0x08003a5c   0x00000250   Code   RO          147    i.main              record_main.o
+    0x08003cac   0x08003cac   0x000001a4   Data   RO          391    .constdata          record_audio_record.o
+    0x08003e50   0x08003e50   0x00000060   Data   RO          524    .constdata          record_board_audio.o
+    0x08003eb0   0x08003eb0   0x00000028   Data   RO         3810    .constdata          c_w.l(_printf_hex_int.o)
+    0x08003ed8   0x08003ed8   0x00000011   Data   RO         3845    .constdata          c_w.l(__printf_flags_ss_wp.o)
+    0x08003ee9   0x08003ee9   0x00000003   PAD
+    0x08003eec   0x08003eec   0x0000095b   Data   RO          148    .conststring        record_main.o
+    0x08004847   0x08004847   0x00000001   PAD
+    0x08004848   0x08004848   0x000001a8   Data   RO          392    .conststring        record_audio_record.o
+    0x080049f0   0x080049f0   0x00000020   Data   RO         4040    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08004998, Size: 0x0000eff0, Max: 0x00010000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08004a10, Size: 0x0000eff0, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08004998   0x00000001   Data   RW           26    .data               exti.o
-    0x20000001   0x08004999   0x00000002   Data   RW          342    .data               usart.o
-    0x20000003   0x0800499b   0x00000001   PAD
-    0x20000004   0x0800499c   0x00000004   Data   RW          343    .data               usart.o
-    0x20000008   0x080049a0   0x00000010   Data   RW          393    .data               record_audio_record.o
-    0x20000018   0x080049b0   0x00000024   Data   RW          525    .data               record_board_audio.o
-    0x2000003c   0x080049d4   0x00000014   Data   RW         2434    .data               stm32f10x_rcc.o
+    0x20000000   0x08004a10   0x00000001   Data   RW           26    .data               exti.o
+    0x20000001   0x08004a11   0x00000002   Data   RW          342    .data               usart.o
+    0x20000003   0x08004a13   0x00000001   PAD
+    0x20000004   0x08004a14   0x00000004   Data   RW          343    .data               usart.o
+    0x20000008   0x08004a18   0x00000010   Data   RW          393    .data               record_audio_record.o
+    0x20000018   0x08004a28   0x00000024   Data   RW          525    .data               record_board_audio.o
+    0x2000003c   0x08004a4c   0x00000014   Data   RW         2434    .data               stm32f10x_rcc.o
     0x20000050        -       0x00000080   Zero   RW          341    .bss                usart.o
     0x200000d0        -       0x0000ab04   Zero   RW          390    .bss                record_audio_record.o
     0x2000abd4        -       0x000021b8   Zero   RW          523    .bss                record_board_audio.o
     0x2000cd8c        -       0x00000060   Zero   RW         3916    .bss                c_w.l(libspace.o)
-    0x2000cdec   0x080049e8   0x00000004   PAD
+    0x2000cdec   0x08004a60   0x00000004   PAD
     0x2000cdf0        -       0x00000200   Zero   RW           18    HEAP                startup_stm32f10x_hd.o
     0x2000cff0        -       0x00002000   Zero   RW           17    STACK               startup_stm32f10x_hd.o
 
@@ -2062,9 +2062,9 @@ Image component sizes
         76          0          0          0          0       1028   delay.o
         80         12          0          1          0     245361   exti.o
        144         16          0          0          0       1969   misc.o
-      2384        768        844         16      43780      10851   record_audio_record.o
-      5492        372         96         36       8632      40480   record_board_audio.o
-      2756        870       2535          0          0      10907   record_main.o
+      2636        982        844         16      43780      10895   record_audio_record.o
+      5588        380         96         36       8632      40716   record_board_audio.o
+      2668        868       2395          0          0      10731   record_main.o
         64         26        304          0       8704        816   startup_stm32f10x_hd.o
        314         10          0          0          0       4039   stm32f10x_dma.o
         12          6          0          0          0        505   stm32f10x_exti.o
@@ -2077,7 +2077,7 @@ Image component sizes
        314         30          0          6        128       4189   usart.o
 
     ----------------------------------------------------------------------
-     13078       2204       3812         80      61244     351873   Object Totals
+     13338       2424       3672         80      61244     351977   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         12          0          1          1          0          0   (incl. Padding)
 
@@ -2147,15 +2147,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     14968       2254       3872         80      61344     346709   Grand Totals
-     14968       2254       3872         80      61344     346709   ELF Image Totals
-     14968       2254       3872         80          0          0   ROM Totals
+     15228       2474       3732         80      61344     346813   Grand Totals
+     15228       2474       3732         80      61344     346813   ELF Image Totals
+     15228       2474       3732         80          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                18840 (  18.40kB)
+    Total RO  Size (Code + RO Data)                18960 (  18.52kB)
     Total RW  Size (RW Data + ZI Data)             61424 (  59.98kB)
-    Total ROM Size (Code + RO Data + RW Data)      18920 (  18.48kB)
+    Total ROM Size (Code + RO Data + RW Data)      19040 (  18.59kB)
 
 ==============================================================================
 

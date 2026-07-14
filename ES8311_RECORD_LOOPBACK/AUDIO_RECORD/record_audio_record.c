@@ -14,7 +14,7 @@
 #define AUDIO_RECORD_CAPTURE_STEP_SAMPLES 1U
 #define AUDIO_RECORD_ADPCM_BYTES ((AUDIO_RECORD_DEMO_SAMPLES + 1U) / 2U)
 #define AUDIO_RECORD_TEST_TONE_MS 1000U
-#define AUDIO_RECORD_MONITOR_MS 8000U
+#define AUDIO_RECORD_MONITOR_MS 5000U
 #define AUDIO_RECORD_ENABLE_ADC_DAC_MONITOR 0U
 #define AUDIO_RECORD_PLAYBACK_TARGET_PEAK 12000U
 #define AUDIO_RECORD_PLAYBACK_GAIN_Q8_ONE 256U
@@ -467,6 +467,14 @@ int audio_record_demo_once(void)
            g_record_debug.capture_max,
            (unsigned long)g_record_debug.playback_gain_percent);
     audio_record_stage_log("capture board");
+    if (g_record_debug.capture_abs_peak < 256U)
+        printf("[record-stage] mic_signal=TOO_LOW check-bias-polarity-routing\r\n");
+    else if (g_record_debug.capture_abs_peak < 2000U)
+        printf("[record-stage] mic_signal=LOW check-mic-distance-and-bias\r\n");
+    else if (g_record_debug.capture_abs_peak > 30000U)
+        printf("[record-stage] mic_signal=CLIPPING reduce-analog-gain\r\n");
+    else
+        printf("[record-stage] mic_signal=OK\r\n");
 
     printf("[record-stage] init-playback start\r\n");
     if (board_audio_init_playback() != 0)
@@ -495,16 +503,16 @@ int audio_record_demo_once(void)
     if (audio_record_play_adpcm() != 0)
     {
         board_audio_drain();
-        board_audio_stop_playback();
         g_record_debug.playback_done_board = *board_audio_get_debug_info();
+        board_audio_stop_playback();
         g_record_debug.last_result = -4;
         audio_record_stage_log("playback-recorded fail");
         return -4;
     }
 
     board_audio_drain();
-    board_audio_stop_playback();
     g_record_debug.playback_done_board = *board_audio_get_debug_info();
+    board_audio_stop_playback();
     printf("[record-stage] playback-recorded stats peak=%lu mean=%lu nonzero=%lu gain_pct=%lu\r\n",
            (unsigned long)g_record_debug.playback_abs_peak,
            (unsigned long)g_record_debug.playback_mean_abs,

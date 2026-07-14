@@ -27,7 +27,7 @@ static void dump_playback_path_check(const char *tag, const board_audio_debug_in
     int codec_clks = ((dbg->codec_reg01 & 0x3FU) == 0x3FU);
     int dac_serial = ((dbg->codec_reg09 & 0x3FU) == 0x0CU);
     int amp_enabled = (dbg->gpio_amp_state == 0U);
-    int tx_seen = (dbg->tx_frames > 0U);
+    const char *tx_state = (dbg->tx_frames > 0U) ? "OK" : (mcu_master_tx ? "WAIT" : "FAIL");
 
     printf("[%s-check] i2c=%s mcu_master_tx=%s codec_clks=%s dac_sdp=%s amp_enabled=%s tx_seen=%s sr=%lu i2spr=0x%04lX\r\n",
            tag,
@@ -36,7 +36,7 @@ static void dump_playback_path_check(const char *tag, const board_audio_debug_in
            check_text(codec_clks),
            check_text(dac_serial),
            check_text(amp_enabled),
-           check_text(tx_seen),
+           tx_state,
            (unsigned long)dbg->last_sample_rate,
            (unsigned long)dbg->spi3_i2spr);
 }
@@ -282,6 +282,7 @@ static void dump_record_debug(void)
            (unsigned int)dbg->last_adpcm[4], (unsigned int)dbg->last_adpcm[5],
            (unsigned int)dbg->last_adpcm[6], (unsigned int)dbg->last_adpcm[7]);
 
+#if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_SOFTWARE_PB4
     for (i = 0U; i < BOARD_AUDIO_SOFT_I2S_VARIANT_COUNT; ++i)
     {
         const board_audio_soft_i2s_variant_info_t *v = &dbg->soft_variants[i];
@@ -304,6 +305,9 @@ static void dump_record_debug(void)
                v->last_left,
                v->last_right);
     }
+#else
+    (void)i;
+#endif
 }
 int main(void)
 {
@@ -318,8 +322,8 @@ int main(void)
     printf("[audio-record] build %s %s\r\n", __DATE__, __TIME__);
     printf("[audio-record] USART1 PA9/PA10 115200 8N1\r\n");
 #if BOARD_AUDIO_RECORD_RX_BACKEND == BOARD_AUDIO_RECORD_RX_HARDWARE_SPI3
-    printf("[audio-record] fw=record-weact-16k-hw-i2s-pb5-v43\r\n");
-    printf("[audio-record] record_rx=SPI3 I2S MasterRx PB5; record/replay 16k; monitor off\r\n");
+    printf("[audio-record] fw=record-custom-board-mic-bias-fix-v49\r\n");
+    printf("[audio-record] record_rx=SPI3 I2S MasterRx PB5; safe half-duplex switch; record/replay 16k\r\n");
 #else
     printf("[audio-record] fw=record-weact-16k-soft-i2s-pb4-v43\r\n");
     printf("[audio-record] record_rx=software I2S PB4 v2; record/replay 16k; monitor off\r\n");
